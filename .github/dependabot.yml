@@ -10,6 +10,9 @@ updates:
       gradle-dependencies:
         patterns: ["*"]
     ignore:
+      # 메이저 업데이트는 자동 제안하지 않는다. 명세 3장이 메이저 버전을 정해 둔 경우가 있다 (예: JUnit 5).
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
       # 1.37.x는 Spotless에서 포맷 실패. 호환되는 버전이 나오면 제거한다 (docs/decisions.md).
       - dependency-name: com.google.googlejavaformat:google-java-format
         versions: ["1.37.x"]

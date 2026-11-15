@@ -1,0 +1,27 @@
+# 모든 의존성·도구 버전은 이 파일에서만 관리한다 (명세 6.12).
+
+[versions]
+java-toolchain = "21"   # 컴파일·린트에 쓰는 JDK
+java-release = "17"     # 바이트코드 타깃 (Spring Boot 3 최소 요구 버전)
+junit = "5.14.3"
+assertj = "3.27.6"
+jspecify = "1.0.0"
+errorprone = "2.51.0"
+nullaway = "0.14.2"
+google-java-format = "1.36.1"  # 1.37.0은 Spotless 8.11에서 실패 (docs/decisions.md)
+jacoco = "0.8.14"
+spotless-plugin = "8.11.0"
+errorprone-plugin = "5.1.1"
+
+[libraries]
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
+errorprone-core = { module = "com.google.errorprone:error_prone_core", version.ref = "errorprone" }
+nullaway = { module = "com.uber.nullaway:nullaway", version.ref = "nullaway" }
+
+# build-logic(컨벤션 플러그인)에서 쓰는 Gradle 플러그인 아티팩트
+spotless-gradle-plugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless-plugin" }
+errorprone-gradle-plugin = { module = "net.ltgt.gradle:gradle-errorprone-plugin", version.ref = "errorprone-plugin" }

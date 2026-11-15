@@ -17,3 +17,4 @@
 - [M2] 6.4 "비교 시 대시 제거 후 같다고 본다" — 환경변수에서 온 키에만 적용하는지, 모든 비교에 적용하는지 모호했다 → 모든 비교를 "정규형에서 대시를 뺀 비교 키"로 한다. Spring도 키 출처와 관계없이 대시를 무시하고 비교한다. 단, 인덱스(`[...]`) 안은 그대로 둔다.
 - [M2] 6.4 정규형 — `API_KEY`처럼 대문자만 있는 조각을 camelCase로 쪼개면 `a-p-i-k-e-y`가 된다 → 소문자가 없는 조각은 소문자화만 한다. 약어+단어(`URLPath`)는 `url-path`로 나눈다. 비교 키에는 영향이 없다(표시용).
 - [M2] 8장 "동작을 바꾸는 커밋은 docs/reference도 함께" — 4장의 reference 목록(rules, cli, gradle-dsl, json-report)에 정규화 문서가 없었다 → 키 비교 규칙은 사용자가 결과를 이해하는 데 필요하므로 `docs/reference/key-normalization.md`를 추가했다.
+- [M2 이후] 3장 "JUnit 5" — Dependabot이 JUnit 6으로 올리는 PR을 만들었다. 명세가 메이저 버전을 정한 라이브러리가 있다 → Gradle 의존성의 메이저 업데이트는 Dependabot이 제안하지 않게 했다. 메이저 업그레이드는 명세를 고친 뒤 사람이 한다. GitHub Actions는 메이저 업데이트도 받는다.

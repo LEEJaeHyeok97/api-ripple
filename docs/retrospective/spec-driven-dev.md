@@ -27,5 +27,5 @@ LLM이 되묻거나 잘못 해석한 경우를 사실대로 적는다. "LLM이 �
 
 - **원래 문장**: 명세 6.8 `uses: LEEJaeHyeok97/config-guard/action@v0`. 저장소 이름은 `api-ripple`이다.
 - **LLM의 해석**: 둘 중 하나를 맞춰야 한다고 보고 물었다. "이름은 맘에 듬 그냥 진행"이라는 답을 받았다. 저장소 이름(`api-ripple`)을 유지하고, 제품 이름은 `config-guard`로 두는 것으로 해석했다.
-- **실제 의도**: (확인 중) Action 경로를 `LEEJaeHyeok97/api-ripple/action@v0`로 쓸지는 M8 전에 다시 확인한다.
+- **실제 의도**: 해석이 맞았다. 저장소 이름은 `api-ripple`을 유지하고, Action 경로는 `LEEJaeHyeok97/api-ripple/action@v0`로 쓴다 (2026-11-16 확인). 다만 "이름은 맘에 듬"이 어느 이름을 가리키는지 한 번 더 물어야 했다.
 - **고친다면**: 명세에 저장소 이름과 제품 이름을 따로 적는다 (예: "저장소: api-ripple, 도구 이름: config-guard"). 외부에 노출되는 식별자(플러그인 ID, Action 경로)는 표로 한 번에 정의한다.

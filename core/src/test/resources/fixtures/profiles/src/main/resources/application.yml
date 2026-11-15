@@ -1,0 +1,31 @@
+app:
+  name: demo
+  feature:
+    timeout: 30
+spring:
+  profiles:
+    group:
+      prod: prod-db, prod-mq
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+app:
+  feature:
+    timeout: 60
+  region: ap-northeast-2
+---
+spring:
+  config:
+    activate:
+      on-profile: [dev, local]
+app:
+  debug-mode: true
+---
+spring:
+  config:
+    activate:
+      on-profile: "!prod"
+app:
+  never-analyzed: true

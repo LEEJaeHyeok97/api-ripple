@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER:app}
+redis:
+  host: ${REDIS_HOST:localhost}
+mail:
+  sender: noreply-${MAIL_DOMAIN}
+cache:
+  ttl: ${CACHE_TTL:${DEFAULT_TTL}}

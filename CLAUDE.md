@@ -11,15 +11,22 @@
 ## 명령
 
 ```bash
-./gradlew build        # 컴파일 + 테스트 + 검사 전체. 커밋 전에 반드시 통과해야 한다.
+./gradlew build                      # 전체 검사: 컴파일(Error Prone + NullAway) + 테스트 + Spotless + JaCoCo(core 90%)
+./gradlew spotlessApply              # google-java-format으로 자동 포맷. build 전에 실행한다.
+./gradlew :core:test                 # core 테스트만
+./gradlew build -PtestJavaVersion=17 # 테스트를 JDK 17 런타임에서 실행 (JDK 17 툴체인 필요)
 ```
 
-모듈과 검사 도구(Spotless, Error Prone, JaCoCo)가 추가되면 이 절을 갱신한다.
+- 컴파일과 린트는 JDK 21 툴체인으로 하고, 바이트코드는 17로 낸다(`--release 17`).
+- 의존성과 도구 버전은 `gradle/libs.versions.toml`에서만 바꾼다.
+- 공통 빌드 규칙은 `build-logic/`의 `configguard.java-conventions` 플러그인에 있다. 모듈 빌드 파일에 중복해서 쓰지 않는다.
+- `main` 코드는 NullAway가 검사한다. null이 될 수 있는 값은 `org.jspecify.annotations.Nullable`로 표시한다.
 
 ## 디렉토리 역할
 
 | 경로 | 역할 | 상태 |
 |---|---|---|
+| `build-logic/` | 공통 빌드 규칙(컨벤션 플러그인) | M1 |
 | `core/` | 분석 엔진. Gradle 의존성 없는 순수 라이브러리 | M1~ |
 | `cli/` | core를 감싼 picocli CLI | M6 |
 | `gradle-plugin/` | core를 감싼 Gradle 플러그인 | M7 |

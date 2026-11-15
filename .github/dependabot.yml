@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: build
+    groups:
+      gradle-dependencies:
+        patterns: ["*"]
+    ignore:
+      # 1.37.x는 Spotless에서 포맷 실패. 호환되는 버전이 나오면 제거한다 (docs/decisions.md).
+      - dependency-name: com.google.googlejavaformat:google-java-format
+        versions: ["1.37.x"]
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci

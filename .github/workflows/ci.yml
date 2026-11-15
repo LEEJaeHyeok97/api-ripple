@@ -23,7 +23,7 @@ jobs:
         test-java: ["17", "21"]
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           # 마지막 버전(21)이 JAVA_HOME이 되어 Gradle을 실행한다.

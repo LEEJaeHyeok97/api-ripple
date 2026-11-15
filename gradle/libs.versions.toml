@@ -3,11 +3,11 @@
 [versions]
 java-toolchain = "21"   # 컴파일·린트에 쓰는 JDK
 java-release = "17"     # 바이트코드 타깃 (Spring Boot 3 최소 요구 버전)
-junit = "5.14.3"
-assertj = "3.27.6"
-jspecify = "1.0.0"
-errorprone = "2.51.0"
-nullaway = "0.14.2"
+junit = "5.14.4"
+assertj = "3.27.7"
+jspecify = "1.0.1"
+errorprone = "2.52.0"
+nullaway = "0.14.3"
 google-java-format = "1.36.1"  # 1.37.0은 Spotless 8.11에서 실패 (docs/decisions.md)
 jacoco = "0.8.14"
 spotless-plugin = "8.11.0"

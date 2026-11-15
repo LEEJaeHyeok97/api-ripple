@@ -9,3 +9,7 @@
 
 - 프로젝트 문서: README, 명세(`docs/spec.md`), `CLAUDE.md`, 설계 결정·아이디어·회고 문서 틀 (M0)
 - Gradle wrapper와 빌드 골격, JDK 17/21 매트릭스 CI 워크플로 (M0)
+- 멀티 모듈 빌드: `build-logic` 컨벤션 플러그인, version catalog, `core` 모듈 (M1)
+- 품질 게이트: Spotless(google-java-format), Error Prone + NullAway, JaCoCo(core 라인 90%) (M1)
+- 도메인 모델: `RequiredKey`, `ProvidedKey`, `Finding`, `Suggestion`, 규칙 ID `CG001`~`CG005` (M1)
+- CI: JDK 21로 빌드하고 JDK 17/21에서 테스트, Dependabot, PR 템플릿 (M1)

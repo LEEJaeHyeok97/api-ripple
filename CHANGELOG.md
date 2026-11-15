@@ -14,3 +14,4 @@
 - 도메인 모델: `RequiredKey`, `ProvidedKey`, `Finding`, `Suggestion`, 규칙 ID `CG001`~`CG005` (M1)
 - CI: JDK 21로 빌드하고 JDK 17/21에서 테스트, Dependabot, PR 템플릿 (M1)
 - 키 정규화: Spring relaxed binding 규칙(kebab-case 정규형, 대시 무시 비교, 환경변수 ↔ 키 변환), 레퍼런스 문서 `docs/reference/key-normalization.md` (M2)
+- 설정 소스 수집: `application*.yml|yaml|properties`(루트·`config/`), 멀티 도큐먼트(`---`, `#---`), 프로필 병합(include/group 1단계), 플레이스홀더 환경변수 추적, 환경변수 이름 목록(.env / 이름 목록), 레퍼런스 문서 `docs/reference/config-sources.md` (M3)

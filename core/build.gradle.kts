@@ -4,6 +4,10 @@ plugins {
     jacoco
 }
 
+dependencies {
+    implementation(libs.snakeyaml)
+}
+
 jacoco {
     toolVersion = libs.versions.jacoco.get()
 }

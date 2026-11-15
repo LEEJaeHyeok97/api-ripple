@@ -1,0 +1,6 @@
+payment:
+  api-key: ${PAYMENT_API_KEY}
+servers:
+  - host: a.internal
+    port: 8080
+  - host: b.internal

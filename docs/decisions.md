@@ -18,3 +18,12 @@
 - [M2] 6.4 정규형 — `API_KEY`처럼 대문자만 있는 조각을 camelCase로 쪼개면 `a-p-i-k-e-y`가 된다 → 소문자가 없는 조각은 소문자화만 한다. 약어+단어(`URLPath`)는 `url-path`로 나눈다. 비교 키에는 영향이 없다(표시용).
 - [M2] 8장 "동작을 바꾸는 커밋은 docs/reference도 함께" — 4장의 reference 목록(rules, cli, gradle-dsl, json-report)에 정규화 문서가 없었다 → 키 비교 규칙은 사용자가 결과를 이해하는 데 필요하므로 `docs/reference/key-normalization.md`를 추가했다.
 - [M2 이후] 3장 "JUnit 5" — Dependabot이 JUnit 6으로 올리는 PR을 만들었다. 명세가 메이저 버전을 정한 라이브러리가 있다 → Gradle 의존성의 메이저 업데이트는 Dependabot이 제안하지 않게 했다. 메이저 업그레이드는 명세를 고친 뒤 사람이 한다. GitHub Actions는 메이저 업데이트도 받는다.
+- [M3] 6.2 "기본 위치: src/main/resources/" — Spring 기본 위치 중 `classpath:/config/`를 볼지 정해져 있지 않았다 → 본다 (사용자 승인). 빼면 config/에만 있는 키를 "누락"으로 오탐한다. 우선순위는 Spring과 같이 루트 < config/, 같은 위치에서 yml < yaml < properties.
+- [M3] 6.2 "멀티 도큐먼트 yml" — properties의 멀티 도큐먼트(`#---`)는 명세에 없었다 → 지원한다 (사용자 승인). Spring 2.4+ 기본 동작이고, 빼면 프로필 전용 문서의 키가 모든 프로필에 들어가 누락을 놓친다.
+- [M3] 6.2 on-profile — 프로필 식(`!`, `&`, `|`, 괄호) 처리가 정해져 있지 않았다 → `,`와 `|`는 OR로 지원하고, `!`·`&`·괄호를 쓴 문서는 분석에서 빼고 CG005로 알린다. 부분 지원으로 틀린 키 집합을 만드는 것보다 "분석 불가"가 낫다.
+- [M3] 6.2 "include / group 1단계" — 순서와 출처가 정해져 있지 않았다 → include는 대상 프로필로 기동할 때 적용되는 문서에서만 읽고 대상보다 먼저 활성화한다. group은 어느 문서에 있든 읽고 대상 뒤에 활성화한다. 둘 다 재귀하지 않는다.
+- [M3] 6.2 프로필 이름 "default" — `application.yml`의 프로필 이름과 Spring의 `default` 프로필(활성 프로필이 없을 때)이 겹쳤다 → 내부적으로 파일 프로필 없음(null)과 `default` 프로필을 구분한다. 리포트의 `ProvidedKey.profile`은 기본 파일이면 `default`다.
+- [M3] 6.2 "${ENV_NAME}(기본값 없음)" — 설정 값의 `${a:${b}}`를 어떻게 볼지 정해져 있지 않았다 → 6.1의 @Value 규칙과 같게 기본값 안을 재귀 분석해 `b`를 요구 환경변수로 기록한다.
+- [M3] 6.2 YAML 평탄화 — 빈 값 처리가 정해져 있지 않았다 → Spring과 같이 빈 리스트(`[]`)와 null 값은 키를 제공하고, 빈 매핑(`{}`)은 키를 만들지 않는다. 병합 키(`<<`)는 펼친다.
+- [M3] 2장 "값은 절대 출력하지 않는다" — 파서 예외 메시지가 문제 줄을 인용할 수 있다 → YAML 문법 오류는 위치만 담은 `ConfigSourceException`으로 바꾼다. 문서 활성화용 구조 키(on-profile, include, group)의 값만 예외적으로 읽는다(프로필 이름).
+- [M3] 5장 도메인 모델 — "분석 불가"를 담을 타입이 없었다 → `model.Unanalyzable(key, location, message)`을 추가했다. 소스(지원하지 않는 프로필 식)와 M4 추출(SpEL, 동적 키)이 함께 쓰고, M5에서 CG005가 된다.

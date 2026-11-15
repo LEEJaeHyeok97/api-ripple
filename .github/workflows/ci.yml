@@ -39,7 +39,7 @@ jobs:
           -Porg.gradle.java.installations.auto-download=false
       - name: Upload test reports
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: test-reports-jdk${{ matrix.test-java }}
           path: "**/build/reports/"

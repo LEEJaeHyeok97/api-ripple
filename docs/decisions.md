@@ -53,3 +53,8 @@
 - [M6] 3장 "CLI fat jar" — shadow 플러그인은 표에 없다 → Gradle 기본 `Jar` 태스크로 런타임 클래스패스를 합친 `fatJar`(`config-guard-<version>-all.jar`)를 만든다. 서명 파일과 `module-info`는 뺀다.
 - [M6] 6.10 explain "빌드 시 리소스로 포함" → `cli`의 `processResources`가 `docs/reference/rules/*.md`를 그대로 복사한다. `explain` 출력이 문서 파일과 바이트 단위로 같은지 테스트한다.
 - [M6] 6.9 `--format` 값 — 대소문자 구분이 정해져 있지 않았다 → 대소문자를 무시한다 (`--format JSON`도 허용).
+- [M7] 6.15 "gradle-plugin: TestKit으로 samples/ 프로젝트에 대해" — samples/는 M8에서 만든다(7장 순서) → M7의 TestKit 테스트는 core fixture를 임시 프로젝트로 복사해 쓰고, samples/ 대상 테스트는 M8에서 추가한다.
+- [M7] 6.7 "입력: envFiles" — 파일 내용뿐 아니라 "어느 파일이 어느 프로필인지"도 결과에 영향을 준다 → 파일은 `@InputFiles`, 프로필 → 상대 경로 맵은 `@Input`으로 함께 선언했다. 실제 경로(`@Internal`)는 태스크 실행에만 쓴다.
+- [M7] 6.7 태스크 실패 — 실패하기 전에 리포트를 쓸지 정해져 있지 않았다 → 리포트(md, json)를 먼저 쓰고 실패한다. 6.8 Action이 "실패해도 리포트 생성까지 진행"하고 코멘트를 달아야 하기 때문이다.
+- [M7] 6.7 증분 빌드 — 태스크를 `@CacheableTask`로 했다. 입력이 같으면 UP-TO-DATE/FROM-CACHE가 되어 콘솔 리포트가 다시 나오지 않는다. 실패한 실행은 캐시되지 않으므로 오류는 매번 다시 보인다.
+- [M7] 6.7 `profiles` "필수" — 비었을 때 동작이 정해져 있지 않았다 → 태스크 실행 시 설정 방법을 알려 주며 실패한다. 설정 단계에서 실패시키면 `configGuardCheck`를 쓰지 않는 빌드까지 깨진다.

@@ -47,3 +47,9 @@
 - [M5] 6.6 콘솔 예시 — 키 열 너비가 명세에 없었다 → 섹션 안 가장 긴 키 + 4칸. 명세 예시와 글자 단위로 같다(테스트로 고정).
 - [M5] 6.10 "실제 출력이 스키마를 통과하는지 테스트" — 3장 표에 JSON Schema 검증기가 없다 → 사용자가 자리에 없어 라이브러리 추가를 묻지 못했다. 스키마가 쓰는 키워드만 지원하는 테스트 전용 검증기(`MiniJsonSchema`)를 만들고, 모르는 키워드가 나오면 실패하게 했다. 외부 검증기(networknt json-schema-validator 등)로 바꿀지 확인이 필요하다.
 - [M5] 6.6 Markdown — 공통 섹션에 "✅ 문제 없음" 줄을 붙일지 모호했다 → 공통 섹션에는 ERROR가 나오지 않으므로 상태 줄 없이 INFO만 접어서 보인다.
+- [M6] 6.9 CLI 옵션 — 명세의 CLI 옵션에 Gradle DSL의 `extraFrameworkPrefixes`에 해당하는 것이 없어서 "같은 입력에 같은 결과"를 만들 수 없었다 → `--framework-prefix`를 추가했다.
+- [M6] 6.9 `--env-file prod=deploy/prod.env.keys` — 상대 경로의 기준(현재 디렉터리 vs PATH)이 정해져 있지 않았다 → 일반적인 CLI 관례대로 현재 디렉터리 기준. 문서에 적었다.
+- [M6] 6.9 종료 코드 2 "사용법 오류"의 범위가 정해져 있지 않았다 → 필수 옵션 누락, 없는 경로·파일, 모르는 형식·규칙 ID, 그리고 `--env-file`의 프로필이 `--profile`에 없는 경우(오타 방지)를 2로 본다. YAML 문법 오류처럼 입력 내용이 잘못된 경우는 3(내부 오류)이다.
+- [M6] 3장 "CLI fat jar" — shadow 플러그인은 표에 없다 → Gradle 기본 `Jar` 태스크로 런타임 클래스패스를 합친 `fatJar`(`config-guard-<version>-all.jar`)를 만든다. 서명 파일과 `module-info`는 뺀다.
+- [M6] 6.10 explain "빌드 시 리소스로 포함" → `cli`의 `processResources`가 `docs/reference/rules/*.md`를 그대로 복사한다. `explain` 출력이 문서 파일과 바이트 단위로 같은지 테스트한다.
+- [M6] 6.9 `--format` 값 — 대소문자 구분이 정해져 있지 않았다 → 대소문자를 무시한다 (`--format JSON`도 허용).

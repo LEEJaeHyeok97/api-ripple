@@ -17,3 +17,4 @@
 - 설정 소스 수집: `application*.yml|yaml|properties`(루트·`config/`), 멀티 도큐먼트(`---`, `#---`), 프로필 병합(include/group 1단계), 플레이스홀더 환경변수 추적, 환경변수 이름 목록(.env / 이름 목록), 레퍼런스 문서 `docs/reference/config-sources.md` (M3)
 - 키 추출: `@Value`(중첩 플레이스홀더, 같은 파일 상수), `Environment.getProperty/getRequiredProperty`, `@ConfigurationProperties`(JavaBean·생성자·record 바인딩, 중첩, 컬렉션), `@ConditionalOnProperty`/`@Profile` 조건부 강등, 분석 불가 패턴 보고, 레퍼런스 문서 `docs/reference/key-extraction.md` (M4)
 - 비교와 리포트: 규칙 CG001~CG005, 수정 제안(Suggestion), 콘솔·Markdown(PR 코멘트 마커)·JSON 렌더러, JSON 스키마 `schema/report.schema.json`(schemaVersion 1), 규칙 문서 `docs/reference/rules/`, `docs/reference/json-report.md`, fixture 8개 기대값 테스트, secret 유출 테스트 (M5)
+- CLI `config-guard`: `check`(console/markdown/json, `--fail-on`, `--ignore`, `--env-file`, `--framework-prefix`), `explain`, `rules`, `--version`; 고정 종료 코드(0/1/2/3), stdout/stderr 분리, 단일 실행 jar(`:cli:fatJar`), 레퍼런스 문서 `docs/reference/cli.md` (M6)

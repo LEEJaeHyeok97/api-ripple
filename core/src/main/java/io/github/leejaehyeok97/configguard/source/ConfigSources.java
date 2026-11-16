@@ -4,7 +4,6 @@ import io.github.leejaehyeok97.configguard.model.ProvidedKey;
 import io.github.leejaehyeok97.configguard.model.SourceLocation;
 import io.github.leejaehyeok97.configguard.model.Unanalyzable;
 import io.github.leejaehyeok97.configguard.normalize.RelaxedNames;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public final class ConfigSources {
       throws IOException, ConfigSourceException {
     List<ConfigDocument> documents = new ArrayList<>();
     for (ConfigFileScanner.ConfigFile file : ConfigFileScanner.scan(resourceRoots)) {
-      String display = relativePath(projectDir, file.path());
+      String display = SourceLocation.relativePath(projectDir, file.path());
       documents.addAll(
           file.yaml()
               ? YamlConfigParser.parse(file.path(), display, file.profile())
@@ -117,12 +116,5 @@ public final class ConfigSources {
         .filter(active::contains)
         .findFirst()
         .orElse(ProvidedKey.DEFAULT_PROFILE);
-  }
-
-  private static String relativePath(Path projectDir, Path file) {
-    Path base = projectDir.toAbsolutePath().normalize();
-    Path target = file.toAbsolutePath().normalize();
-    Path shown = target.startsWith(base) ? base.relativize(target) : target;
-    return shown.toString().replace(File.separatorChar, '/');
   }
 }

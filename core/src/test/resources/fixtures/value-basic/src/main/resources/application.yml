@@ -1,0 +1,4 @@
+payment:
+  host: pay.example.test
+  merchant-id: m-001
+  fallback-url: https://fallback.example.test

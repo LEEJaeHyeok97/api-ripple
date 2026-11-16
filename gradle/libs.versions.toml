@@ -12,6 +12,7 @@ google-java-format = "1.36.1"  # 1.37.0은 Spotless 8.11에서 실패 (docs/deci
 jacoco = "0.8.14"
 snakeyaml = "2.5"
 javaparser = "3.27.1"
+jackson = "2.19.2"
 spotless-plugin = "8.11.0"
 errorprone-plugin = "5.1.1"
 
@@ -21,6 +22,7 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 javaparser-symbol-solver = { module = "com.github.javaparser:javaparser-symbol-solver-core", version.ref = "javaparser" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
 jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
 errorprone-core = { module = "com.google.errorprone:error_prone_core", version.ref = "errorprone" }

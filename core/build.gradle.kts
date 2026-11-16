@@ -7,14 +7,20 @@ plugins {
 dependencies {
     implementation(libs.snakeyaml)
     implementation(libs.javaparser.symbol.solver)
+    implementation(libs.jackson.databind)
 }
 
 jacoco {
     toolVersion = libs.versions.jacoco.get()
 }
 
+// JSON 출력이 공개 스키마를 통과하는지 테스트한다 (명세 6.10).
+val reportSchema = rootProject.layout.projectDirectory.file("schema/report.schema.json")
+
 tasks.test {
     finalizedBy(tasks.jacocoTestReport)
+    inputs.file(reportSchema).withPathSensitivity(PathSensitivity.RELATIVE).withPropertyName("reportSchema")
+    systemProperty("configguard.reportSchema", reportSchema.asFile.absolutePath)
 }
 
 tasks.jacocoTestReport {

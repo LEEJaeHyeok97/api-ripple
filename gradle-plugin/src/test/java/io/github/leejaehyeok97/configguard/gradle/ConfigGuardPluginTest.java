@@ -23,10 +23,27 @@ class ConfigGuardPluginTest {
   @TempDir Path project;
 
   private void fixture(String name, String configGuardBlock) throws IOException {
-    Path source = Path.of(System.getProperty("configguard.fixtures")).resolve(name);
+    copyProject(
+        Path.of(System.getProperty("configguard.fixtures")).resolve(name), configGuardBlock);
+  }
+
+  /** samples/demo의 소스와 deploy/만 복사한다. Spring Boot 플러그인 없이 config-guard만 적용한다. */
+  private void sample(String configGuardBlock) throws IOException {
+    Path demo = Path.of(System.getProperty("configguard.samples"));
+    copyTree(demo.resolve("src"), project.resolve("src"));
+    copyTree(demo.resolve("deploy"), project.resolve("deploy"));
+    writeBuild(configGuardBlock);
+  }
+
+  private void copyProject(Path source, String configGuardBlock) throws IOException {
+    copyTree(source, project);
+    writeBuild(configGuardBlock);
+  }
+
+  private static void copyTree(Path source, Path destination) throws IOException {
     try (Stream<Path> files = Files.walk(source)) {
       for (Path file : files.toList()) {
-        Path target = project.resolve(source.relativize(file).toString());
+        Path target = destination.resolve(source.relativize(file).toString());
         if (Files.isDirectory(file)) {
           Files.createDirectories(target);
         } else {
@@ -34,6 +51,9 @@ class ConfigGuardPluginTest {
         }
       }
     }
+  }
+
+  private void writeBuild(String configGuardBlock) throws IOException {
     Files.writeString(project.resolve("settings.gradle.kts"), "rootProject.name = \"demo\"\n");
     Files.writeString(
         project.resolve("build.gradle.kts"),
@@ -122,6 +142,30 @@ class ConfigGuardPluginTest {
 
     assertThat(second.getOutput()).contains("Configuration cache entry reused");
     assertThat(second.task(TASK).getOutcome()).isEqualTo(TaskOutcome.SUCCESS);
+  }
+
+  /** 명세 9장: samples/ 앱에서 의도한 ERROR 2건, WARNING 1건이 정확히 나온다. src/test의 키는 보고하지 않는다. */
+  @Test
+  void sampleAppReportsExactlyTheIntendedProblems() throws Exception {
+    sample(
+        """
+        profiles.set(listOf("dev", "prod"))
+        envFiles.put("dev", file("deploy/dev.env.keys"))
+        envFiles.put("prod", file("deploy/prod.env.keys"))
+        """);
+
+    BuildResult result = runner(TASK).buildAndFail();
+
+    assertThat(result.task(TASK).getOutcome()).isEqualTo(TaskOutcome.FAILED);
+    String json = Files.readString(project.resolve("build/reports/config-guard/report.json"));
+    assertThat(json)
+        .contains("\"errors\": 2", "\"warnings\": 1", "\"infos\": 0")
+        .contains(
+            "\"key\": \"payment.api-key\"",
+            "\"key\": \"DB_URL\"",
+            "\"key\": \"alarm.push.fcm-key\"")
+        .doesNotContain("test.only.key");
+    assertThat(result.getOutput()).contains("config-guard: dev\n  문제 없음");
   }
 
   @Test

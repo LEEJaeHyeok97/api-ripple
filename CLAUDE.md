@@ -30,7 +30,7 @@
 | `build-logic/` | 공통 빌드 규칙(컨벤션 플러그인) | M1 |
 | `core/` | 분석 엔진. Gradle 의존성 없는 순수 라이브러리 | M1~ |
 | `cli/` | core를 감싼 picocli CLI. 규칙 문서는 빌드 때 `docs/reference/rules`에서 복사한다 | M6~ |
-| `gradle-plugin/` | core를 감싼 Gradle 플러그인 | M7 |
+| `gradle-plugin/` | core를 감싼 Gradle 플러그인. TestKit 테스트는 core fixture를 임시 프로젝트로 복사해 쓴다 | M7~ |
 | `action/` | GitHub composite action | M8 |
 | `samples/` | 일부러 설정을 빠뜨린 Spring Boot 샘플 | M8 |
 | `schema/` | JSON 리포트 스키마. 깨지는 변경이면 `schemaVersion`을 올린다 | M5~ |

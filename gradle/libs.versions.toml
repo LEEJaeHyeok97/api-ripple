@@ -14,6 +14,7 @@ snakeyaml = "2.5"
 javaparser = "3.27.1"
 jackson = "2.19.2"
 picocli = "4.7.7"
+plugin-publish = "2.1.1"
 # samples/demo 전용
 spring-boot = "3.5.15"
 spring-dependency-management = "1.1.7"
@@ -38,6 +39,7 @@ spotless-gradle-plugin = { module = "com.diffplug.spotless:spotless-plugin-gradl
 errorprone-gradle-plugin = { module = "net.ltgt.gradle:gradle-errorprone-plugin", version.ref = "errorprone-plugin" }
 
 [plugins]
+gradle-plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "plugin-publish" }
 # samples/demo가 이 카탈로그를 공유한다.
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }

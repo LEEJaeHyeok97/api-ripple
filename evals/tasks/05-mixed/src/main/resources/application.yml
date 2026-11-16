@@ -1,0 +1,3 @@
+notification:
+  sender: noreply@example.test
+  legacy-retry: 3

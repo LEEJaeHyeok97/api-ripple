@@ -174,7 +174,7 @@ config-guard check . --profile prod --env-file prod=deploy/prod.env.keys --forma
 - [x] **M7** Gradle 플러그인: `configGuardCheck` 태스크, TestKit 테스트
 - [x] **M8** GitHub Action + 샘플 앱 + e2e
 - [x] **M9** 문서: 가이드, 규칙 레퍼런스, Agent Skill, llms.txt, 릴리스 설정
-- [ ] **M10** (선택) Agent Skill 효과 평가
+- [x] **M10** (선택) Agent Skill 효과 평가 → [결과](evals/RESULTS.md): 성공률 차이 없음(5/5 대 5/5), 탐색 실행만 감소
 - [ ] 첫 릴리스 (GitHub Release CLI jar, Plugin Portal 배포, Action `v0` 태그) — 사람이 결정
 
 ## 개발 방식

@@ -22,3 +22,4 @@
 - GitHub Action `action/`: `configGuardCheck --continue` 실행, PR 코멘트 게시·갱신(마커), 잡 요약, 종료 코드 전달. 데모 앱 `samples/demo`(ERROR 2, WARNING 1), e2e 워크플로(CLI·Action 실행, 두 JSON 동일성) (M8)
 - 문서: README(설치·출력 예시·AI 에이전트·한계·설계 결정), 가이드(`docs/guide/`: 시작하기, CI 연동, AI 에이전트와 쓰기), Agent Skill `skills/config-guard/SKILL.md`, `llms.txt`, 릴리스 절차 `docs/releasing.md` (M9)
 - 릴리스 설정: 태그 푸시 시 CLI jar를 GitHub Release에 첨부하는 워크플로, Gradle Plugin Portal 배포 설정(core를 플러그인 jar에 포함, artifactId `config-guard-gradle-plugin`) (M9)
+- Agent Skill 평가 `evals/`: 과제 프로젝트 5개, 실행·채점 스크립트(`run.sh`, `score.py`, `report.py`), 결과 `evals/RESULTS.md` (M10)

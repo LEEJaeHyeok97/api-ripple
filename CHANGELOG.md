@@ -15,3 +15,4 @@
 - CI: JDK 21로 빌드하고 JDK 17/21에서 테스트, Dependabot, PR 템플릿 (M1)
 - 키 정규화: Spring relaxed binding 규칙(kebab-case 정규형, 대시 무시 비교, 환경변수 ↔ 키 변환), 레퍼런스 문서 `docs/reference/key-normalization.md` (M2)
 - 설정 소스 수집: `application*.yml|yaml|properties`(루트·`config/`), 멀티 도큐먼트(`---`, `#---`), 프로필 병합(include/group 1단계), 플레이스홀더 환경변수 추적, 환경변수 이름 목록(.env / 이름 목록), 레퍼런스 문서 `docs/reference/config-sources.md` (M3)
+- 키 추출: `@Value`(중첩 플레이스홀더, 같은 파일 상수), `Environment.getProperty/getRequiredProperty`, `@ConfigurationProperties`(JavaBean·생성자·record 바인딩, 중첩, 컬렉션), `@ConditionalOnProperty`/`@Profile` 조건부 강등, 분석 불가 패턴 보고, 레퍼런스 문서 `docs/reference/key-extraction.md` (M4)

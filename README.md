@@ -1,7 +1,7 @@
 # config-guard
 
 [![CI](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/ci.yml)
-[![status](https://img.shields.io/badge/status-pre--alpha%20(M3)-orange)](#roadmap)
+[![status](https://img.shields.io/badge/status-pre--alpha%20(M4)-orange)](#roadmap)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 Spring Boot 애플리케이션의 **환경별 설정 누락을 배포 전에 CI에서 잡아내는** 정적 분석 도구.
@@ -37,7 +37,7 @@ config-guard: prod
 - [x] **M1** 뼈대: 멀티 모듈 Gradle, version catalog, Spotless·Error Prone·JaCoCo, 도메인 모델
 - [x] **M2** 정규화: Spring relaxed binding 규칙 + 단위 테스트
 - [x] **M3** 설정 소스: yml/properties 파싱, 프로필 병합, 플레이스홀더, env 파일
-- [ ] **M4** 키 추출: `@Value`, `Environment`, `@ConfigurationProperties`, 조건부 강등
+- [x] **M4** 키 추출: `@Value`, `Environment`, `@ConfigurationProperties`, 조건부 강등
 - [ ] **M5** 비교 + 리포트: 규칙 CG001~CG005, 수정 제안, 콘솔/Markdown/JSON, JSON 스키마
 - [ ] **M6** CLI: `check` / `explain` / `rules`, 고정된 종료 코드
 - [ ] **M7** Gradle 플러그인: `configGuardCheck` 태스크, TestKit 테스트

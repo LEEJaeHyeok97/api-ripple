@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: orders
+    password: ${DB_PASSWORD}

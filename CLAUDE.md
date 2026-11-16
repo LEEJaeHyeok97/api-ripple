@@ -16,6 +16,7 @@
 ./gradlew :core:test                 # core 테스트만
 ./gradlew build -PtestJavaVersion=17 # 테스트를 JDK 17 런타임에서 실행 (JDK 17 툴체인 필요)
 ./gradlew :cli:fatJar                # CLI 단일 jar: cli/build/libs/config-guard-<version>-all.jar
+(cd samples/demo && ./gradlew configGuardCheck)  # 데모 앱 검사. 일부러 실패한다 (ERROR 2, WARNING 1)
 ```
 
 - 컴파일과 린트는 JDK 21 툴체인으로 하고, 바이트코드는 17로 낸다(`--release 17`).
@@ -31,8 +32,8 @@
 | `core/` | 분석 엔진. Gradle 의존성 없는 순수 라이브러리 | M1~ |
 | `cli/` | core를 감싼 picocli CLI. 규칙 문서는 빌드 때 `docs/reference/rules`에서 복사한다 | M6~ |
 | `gradle-plugin/` | core를 감싼 Gradle 플러그인. TestKit 테스트는 core fixture를 임시 프로젝트로 복사해 쓴다 | M7~ |
-| `action/` | GitHub composite action | M8 |
-| `samples/` | 일부러 설정을 빠뜨린 Spring Boot 샘플 | M8 |
+| `action/` | GitHub composite action (`action.yml`, `comment.sh`) | M8~ |
+| `samples/demo/` | 일부러 prod 설정을 빠뜨린 Spring Boot 앱 (ERROR 2, WARNING 1). 독립 빌드, 플러그인은 `includeBuild("../..")` | M8~ |
 | `schema/` | JSON 리포트 스키마. 깨지는 변경이면 `schemaVersion`을 올린다 | M5~ |
 | `docs/` | 명세, 설계 결정, 가이드, 레퍼런스 | M0~ |
 

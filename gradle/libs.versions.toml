@@ -14,6 +14,9 @@ snakeyaml = "2.5"
 javaparser = "3.27.1"
 jackson = "2.19.2"
 picocli = "4.7.7"
+# samples/demo 전용
+spring-boot = "3.5.15"
+spring-dependency-management = "1.1.7"
 spotless-plugin = "8.11.0"
 errorprone-plugin = "5.1.1"
 
@@ -33,3 +36,8 @@ nullaway = { module = "com.uber.nullaway:nullaway", version.ref = "nullaway" }
 # build-logic(컨벤션 플러그인)에서 쓰는 Gradle 플러그인 아티팩트
 spotless-gradle-plugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless-plugin" }
 errorprone-gradle-plugin = { module = "net.ltgt.gradle:gradle-errorprone-plugin", version.ref = "errorprone-plugin" }
+
+[plugins]
+# samples/demo가 이 카탈로그를 공유한다.
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }

@@ -1,0 +1,70 @@
+name: config-guard
+description: Spring Boot 애플리케이션의 프로필별 설정 누락을 배포 전에 찾고, 결과를 PR 코멘트로 남긴다.
+author: LEEJaeHyeok97
+branding:
+  icon: shield
+  color: green
+
+inputs:
+  working-directory:
+    description: Gradle 프로젝트 디렉터리 (gradlew가 있는 곳). 리포트는 <working-directory>/build/reports/config-guard/에 생긴다.
+    required: false
+    default: "."
+  gradle-task:
+    description: 실행할 Gradle 태스크.
+    required: false
+    default: configGuardCheck
+  comment:
+    description: PR 이벤트에서 report.md를 PR 코멘트로 게시할지. 마커로 기존 코멘트를 찾아 갱신한다.
+    required: false
+    default: "true"
+
+outputs:
+  exit-code:
+    description: Gradle 태스크의 종료 코드.
+    value: ${{ steps.check.outputs.exit-code }}
+  report-markdown:
+    description: report.md 경로.
+    value: ${{ steps.check.outputs.report-markdown }}
+  report-json:
+    description: report.json 경로.
+    value: ${{ steps.check.outputs.report-json }}
+
+runs:
+  using: composite
+  steps:
+    - id: check
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        GRADLE_TASK: ${{ inputs.gradle-task }}
+      run: |
+        set +e
+        # --continue: 태스크가 실패해도 리포트 생성까지 진행한다.
+        ./gradlew "$GRADLE_TASK" --continue
+        code=$?
+        set -e
+        reports="$(pwd)/build/reports/config-guard"
+        {
+          echo "exit-code=$code"
+          echo "report-markdown=$reports/report.md"
+          echo "report-json=$reports/report.json"
+        } >> "$GITHUB_OUTPUT"
+        if [[ -f "$reports/report.md" ]]; then
+          cat "$reports/report.md" >> "$GITHUB_STEP_SUMMARY"
+        fi
+
+    - if: inputs.comment == 'true' && (github.event_name == 'pull_request' || github.event_name == 'pull_request_target')
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        REPO: ${{ github.repository }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        REPORT: ${{ steps.check.outputs.report-markdown }}
+      run: bash "$GITHUB_ACTION_PATH/comment.sh"
+
+    # Gradle 태스크의 종료 코드를 그대로 Action 결과로 돌려준다.
+    - shell: bash
+      env:
+        EXIT_CODE: ${{ steps.check.outputs.exit-code }}
+      run: exit "$EXIT_CODE"

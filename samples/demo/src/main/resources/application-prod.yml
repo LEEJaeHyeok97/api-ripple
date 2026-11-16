@@ -1,0 +1,10 @@
+# 일부러 빠뜨린 것:
+#  - payment.api-key            → CG001 ERROR (PaymentClient가 기본값 없이 요구)
+#  - DB_URL 환경변수            → CG002 ERROR (prod.env.keys에 없음)
+#  - alarm.push.fcm-key         → CG003 WARNING (alarm.push.enabled=true일 때만 필요)
+spring:
+  datasource:
+    url: ${DB_URL}
+alarm:
+  push:
+    enabled: true

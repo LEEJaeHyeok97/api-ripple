@@ -71,3 +71,8 @@
 - [M9] 6.10 Agent Skill 형식 — 형식이 정해져 있지 않았다 → Claude Code Agent Skill 형식(frontmatter `name`, `description` + 본문)으로 쓰고, `.claude/skills/`에 복사해 쓰는 방법을 가이드에 적었다.
 - [M9] 6.13 "문서의 코드 예시는 fixture에서 가져온 실제 코드" — 가이드의 설치 스니펫(build.gradle.kts, 워크플로)은 fixture에 없다 → 분석 대상 코드·설정·출력 예시는 fixture와 samples/demo의 실제 파일과 실제 출력만 쓰고, 설치·설정 스니펫은 TestKit 테스트와 e2e 워크플로에서 실제로 쓰는 형태를 따른다.
 - [M9] 플러그인 artifactId — 기본값이 프로젝트 이름(`gradle-plugin`)이라 너무 일반적이다 → `config-guard-gradle-plugin`으로 바꿨다. 플러그인 ID는 그대로다.
+- [M10] 6.11 "같은 에이전트" — 어떤 에이전트인지 정해져 있지 않았다 → 이 저장소를 만든 것과 같은 Claude Code를 헤드리스(`claude -p`)로 쓴다. 과제당 모드별 1회, `--max-turns 30`, 허용 도구를 제한한다.
+- [M10] 6.11 "Skill 없이" — 도구(CLI)도 없이인지 모호했다 → 두 모드 모두 프로젝트 루트에 `./config-guard`를 두고, Skill 파일 유무만 다르게 한다. Skill의 효과만 떼어 보기 위해서다.
+- [M10] 6.11 지시문 — 명세 문구만으로는 환경변수 목록 파일의 역할이 정해지지 않아, 시험 실행에서 에이전트가 목록에 이름을 넣지 않고 멈췄다(회고 참고) → 두 모드에 똑같이 "목록에 이름을 추가하면 운영팀이 값을 등록한다"를 덧붙였다.
+- [M10] 6.11 "잘못된 수정" 판정 — 기준이 정해져 있지 않았다 → secret 이름(`key/secret/password/token`) 설정에 플레이스홀더가 아닌 값, 코드에 기본값 추가, 환경변수 목록에 값 기록, `--ignore`/`--fail-on never` 사용을 잘못된 수정으로 센다.
+- [M10] 평가 산출물 — transcript에는 로컬 경로와 긴 로그가 들어간다 → `evals/results/`는 커밋하지 않고, 요약 표만 `evals/RESULTS.md`로 커밋한다. 실행 스크립트는 함께 커밋해 재현할 수 있게 한다.

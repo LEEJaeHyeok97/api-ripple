@@ -36,6 +36,7 @@
 | `samples/demo/` | 일부러 prod 설정을 빠뜨린 Spring Boot 앱 (ERROR 2, WARNING 1). 독립 빌드, 플러그인은 `includeBuild("../..")` | M8~ |
 | `schema/` | JSON 리포트 스키마. 깨지는 변경이면 `schemaVersion`을 올린다 | M5~ |
 | `skills/config-guard/` | LLM 에이전트용 Agent Skill. CLI 옵션·규칙이 바뀌면 함께 고친다 | M9~ |
+| `evals/` | Agent Skill 평가 과제·스크립트·결과. `evals/run.sh`는 실제 모델을 호출해 비용이 든다 | M10 |
 | `docs/` | 명세, 설계 결정, 가이드(`guide/`), 레퍼런스(`reference/`), 릴리스 절차 | M0~ |
 | `llms.txt` | 문서 색인. 문서를 추가·이동하면 갱신한다 | M9~ |
 

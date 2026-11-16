@@ -45,7 +45,7 @@
 1. 마일스톤마다 브랜치를 딴다 (`<type>/mN-<topic>`). main에 직접 커밋하지 않는다.
 2. PR을 만들고 CI 통과를 확인한 뒤 squash merge한다. main은 항상 CI가 통과하는 상태다.
 3. 커밋은 Conventional Commits(`feat|fix|test|docs|chore|build|ci(scope): ...`), 한 커밋에 한 가지 목적만.
-4. 마일스톤이 끝나면 README Roadmap 체크박스와 CHANGELOG `Unreleased`를 갱신한다.
+4. 사용자에게 보이는 변경은 CHANGELOG `Unreleased`에 적는다. README는 설치 방법·출력·한계가 바뀔 때 갱신한다.
 5. 마일스톤 하나가 끝나면 멈추고 보고한다. 사람이 "계속"이라고 해야 다음 마일스톤으로 넘어간다.
 
 ## 금지 사항

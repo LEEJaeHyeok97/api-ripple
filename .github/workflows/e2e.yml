@@ -1,0 +1,68 @@
+name: e2e
+
+# samples/demo(일부러 prod 설정을 빠뜨린 Spring Boot 앱)에 CLI와 GitHub Action(Gradle 플러그인)을 실제로 돌린다.
+# 기대: 둘 다 종료 코드 1, ERROR 2 / WARNING 1 / INFO 0, 두 JSON 리포트가 바이트 단위로 같다.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write # Action의 PR 코멘트
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    name: e2e (samples/demo)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Build CLI jar
+        run: ./gradlew :cli:fatJar
+
+      - name: CLI on samples/demo
+        run: |
+          set +e
+          java -jar cli/build/libs/config-guard-*-all.jar check samples/demo \
+            --profile dev --profile prod \
+            --env-file dev=samples/demo/deploy/dev.env.keys \
+            --env-file prod=samples/demo/deploy/prod.env.keys \
+            --format json > cli-report.json
+          code=$?
+          set -e
+          echo "CLI exit code: $code"
+          test "$code" -eq 1
+          jq -e '.summary == {"profiles": ["dev", "prod"], "errors": 2, "warnings": 1, "infos": 0}' cli-report.json
+
+      - name: GitHub Action on samples/demo (expected to fail)
+        id: guard
+        continue-on-error: true
+        uses: ./action
+        with:
+          working-directory: samples/demo
+          gradle-task: configGuardCheck
+          comment: true
+
+      - name: Verify Action result
+        env:
+          OUTCOME: ${{ steps.guard.outcome }}
+          EXIT_CODE: ${{ steps.guard.outputs.exit-code }}
+          REPORT_JSON: ${{ steps.guard.outputs.report-json }}
+        run: |
+          echo "Action outcome: $OUTCOME, exit code: $EXIT_CODE"
+          test "$OUTCOME" = failure
+          test "$EXIT_CODE" -eq 1
+          jq -e '.summary.errors == 2 and .summary.warnings == 1 and .summary.infos == 0' "$REPORT_JSON"
+          # 명세 6.9: CLI와 Gradle 플러그인은 같은 입력에 같은 결과
+          diff cli-report.json "$REPORT_JSON"

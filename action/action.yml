@@ -61,7 +61,7 @@ runs:
         REPO: ${{ github.repository }}
         PR_NUMBER: ${{ github.event.pull_request.number }}
         REPORT: ${{ steps.check.outputs.report-markdown }}
-      run: '"$GITHUB_ACTION_PATH/comment.sh"'
+      run: bash "$GITHUB_ACTION_PATH/comment.sh"
 
     # Gradle 태스크의 종료 코드를 그대로 Action 결과로 돌려준다.
     - shell: bash

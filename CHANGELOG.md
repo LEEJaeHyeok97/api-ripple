@@ -23,3 +23,7 @@
 - 문서: README(설치·출력 예시·AI 에이전트·한계·설계 결정), 가이드(`docs/guide/`: 시작하기, CI 연동, AI 에이전트와 쓰기), Agent Skill `skills/config-guard/SKILL.md`, `llms.txt`, 릴리스 절차 `docs/releasing.md` (M9)
 - 릴리스 설정: 태그 푸시 시 CLI jar를 GitHub Release에 첨부하는 워크플로, Gradle Plugin Portal 배포 설정(core를 플러그인 jar에 포함, artifactId `config-guard-gradle-plugin`) (M9)
 - Agent Skill 평가 `evals/`: 과제 프로젝트 5개, 실행·채점 스크립트(`run.sh`, `score.py`, `report.py`), 결과 `evals/RESULTS.md` (M10)
+
+### Changed
+
+- JSON 리포트 스키마 테스트가 직접 만든 검증기 대신 networknt json-schema-validator(JSON Schema 2020-12)를 쓴다

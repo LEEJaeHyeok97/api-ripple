@@ -140,19 +140,31 @@ class RenderersTest {
   @Test
   void schemaRejectsErrorWithoutSuggestionAndUnknownFields() throws Exception {
     var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
-    var schema =
-        new MiniJsonSchema(
-            mapper.readTree(
-                java.nio.file.Path.of(System.getProperty("configguard.reportSchema")).toFile()));
     var node =
         (com.fasterxml.jackson.databind.node.ObjectNode)
             mapper.readTree(JsonRenderer.render(specExample()));
-    var first = (com.fasterxml.jackson.databind.node.ObjectNode) node.get("findings").get(0);
-    first.putArray("suggestions");
+    ((com.fasterxml.jackson.databind.node.ObjectNode) node.get("findings").get(0))
+        .putArray("suggestions");
     node.put("extra", true);
 
-    assertThat(schema.validate(node))
-        .anyMatch(e -> e.contains("findings[0].suggestions"))
-        .anyMatch(e -> e.contains("unexpected property extra"));
+    assertThat(ReportSchemaAssert.errors(node))
+        .anyMatch(e -> e.contains("/findings/0/suggestions"))
+        .anyMatch(e -> e.contains("extra"));
+  }
+
+  @Test
+  void schemaRejectsFileOnEnvVarSuggestionAndUnknownRule() throws Exception {
+    var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+    var node =
+        (com.fasterxml.jackson.databind.node.ObjectNode)
+            mapper.readTree(JsonRenderer.render(specExample()));
+    var finding = (com.fasterxml.jackson.databind.node.ObjectNode) node.get("findings").get(1);
+    ((com.fasterxml.jackson.databind.node.ObjectNode) finding.get("suggestions").get(0))
+        .put("file", "a.yml");
+    finding.put("ruleId", "CG999");
+
+    assertThat(ReportSchemaAssert.errors(node))
+        .anyMatch(e -> e.contains("/findings/1/suggestions/0/file"))
+        .anyMatch(e -> e.contains("/findings/1/ruleId"));
   }
 }

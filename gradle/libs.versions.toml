@@ -13,6 +13,8 @@ jacoco = "0.8.14"
 snakeyaml = "2.7"
 javaparser = "3.28.2"
 jackson = "2.23.0"
+# 2.x는 Jackson 2, 3.x는 Jackson 3(tools.jackson)을 쓴다. 이 프로젝트는 Jackson 2라서 2.x에 머문다.
+json-schema-validator = "2.0.8"
 picocli = "4.7.7"
 plugin-publish = "2.1.1"
 # samples/demo 전용
@@ -28,6 +30,7 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 javaparser-symbol-solver = { module = "com.github.javaparser:javaparser-symbol-solver-core", version.ref = "javaparser" }
 picocli = { module = "info.picocli:picocli", version.ref = "picocli" }
+json-schema-validator = { module = "com.networknt:json-schema-validator", version.ref = "json-schema-validator" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }
 snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
 jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }

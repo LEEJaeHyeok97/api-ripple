@@ -8,6 +8,8 @@ dependencies {
     implementation(libs.snakeyaml)
     implementation(libs.javaparser.symbol.solver)
     implementation(libs.jackson.databind)
+
+    testImplementation(libs.json.schema.validator)
 }
 
 jacoco {

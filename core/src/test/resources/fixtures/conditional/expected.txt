@@ -1,0 +1,4 @@
+# 조건부 키는 ERROR가 아니라 WARNING. alarm.push.enabled는 @ConditionalOnProperty가 읽으므로 미사용 아님.
+prod WARNING CG003 alarm.push.fcm-key
+prod WARNING CG003 audit.endpoint
+prod WARNING CG003 storage.s3.bucket

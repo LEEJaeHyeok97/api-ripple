@@ -1,0 +1,3 @@
+# sender-address 제공, bucketName(camelCase) → bucket-name 제공, headers.x-trace는 Map prefix로 사용 중
+prod ERROR CG001 app.mail.auth.username
+prod INFO CG004 app.mail.legacy-flag

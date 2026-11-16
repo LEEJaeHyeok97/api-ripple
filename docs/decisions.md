@@ -58,3 +58,10 @@
 - [M7] 6.7 태스크 실패 — 실패하기 전에 리포트를 쓸지 정해져 있지 않았다 → 리포트(md, json)를 먼저 쓰고 실패한다. 6.8 Action이 "실패해도 리포트 생성까지 진행"하고 코멘트를 달아야 하기 때문이다.
 - [M7] 6.7 증분 빌드 — 태스크를 `@CacheableTask`로 했다. 입력이 같으면 UP-TO-DATE/FROM-CACHE가 되어 콘솔 리포트가 다시 나오지 않는다. 실패한 실행은 캐시되지 않으므로 오류는 매번 다시 보인다.
 - [M7] 6.7 `profiles` "필수" — 비었을 때 동작이 정해져 있지 않았다 → 태스크 실행 시 설정 방법을 알려 주며 실패한다. 설정 단계에서 실패시키면 `configGuardCheck`를 쓰지 않는 빌드까지 깨진다.
+- [M8] 6.8 Action 경로 `LEEJaeHyeok97/config-guard/action@v0` — 저장소 이름이 `api-ripple`이다 → `LEEJaeHyeok97/api-ripple/action@v0`로 쓴다 (사용자 확인). `v0` 태그는 릴리스 때 사람이 만든다.
+- [M8] 6.8 "Gradle 태스크의 종료 코드를 그대로 Action 결과로" — composite action은 단계 하나가 실패하면 뒤 단계(코멘트)가 돌지 않는다 → 첫 단계에서 종료 코드를 출력값으로 저장하고, 코멘트를 단 뒤 마지막 단계에서 그 코드로 `exit`한다. `exit-code` 출력도 준다.
+- [M8] 6.8 PR 코멘트 권한 — 포크 PR은 토큰에 쓰기 권한이 없다 → 코멘트 실패는 경고로만 남기고 검사 결과(종료 코드)는 그대로 돌려준다. 리포트는 잡 요약(Step Summary)에도 붙인다.
+- [M8] 6.8 Action 입력 — 사용자 입력을 `run:` 스크립트에 `${{ }}`로 직접 넣으면 스크립트 주입이 가능하다 → 모든 입력을 환경변수로 넘긴다.
+- [M8] 9장 "samples/ 앱에서 ERROR 2건, WARNING 1건" — 프로필이 정해져 있지 않았다 → dev, prod를 검사하고 dev는 문제 없음, prod에서 정확히 ERROR 2(CG001 `payment.api-key`, CG002 `DB_URL`), WARNING 1(CG003 `alarm.push.fcm-key`), INFO 0이 나오게 만들었다. `src/test`에 넣은 키가 보고되지 않는지도 같은 테스트로 확인한다.
+- [M8] 6.12 "의존성 버전은 전부 libs.versions.toml에서만" — 샘플은 독립 빌드라 카탈로그를 따로 둘 수 있었다 → 샘플이 루트 카탈로그를 `from(files("../../gradle/libs.versions.toml"))`로 공유하고, Spring Boot 플러그인 버전도 루트 카탈로그 `[plugins]`에 둔다. 플러그인은 `includeBuild("../..")`로 소스에서 가져온다.
+- [M8] 6.12 e2e — 샘플은 의도적으로 실패한다 → e2e 잡은 "실패해야 통과"다: CLI와 Action 모두 종료 코드 1, 요약 숫자 일치, 두 JSON이 바이트 단위로 같은지(`diff`) 확인한다.

@@ -1,0 +1,11 @@
+app:
+  mail:
+    sender-address: noreply@example.test
+    smtp:
+      host: smtp.example.test
+    headers:
+      x-trace: on
+  storage:
+    bucketName: demo-bucket
+  queue:
+    name: jobs

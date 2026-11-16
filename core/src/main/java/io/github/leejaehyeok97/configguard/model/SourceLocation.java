@@ -2,6 +2,9 @@ package io.github.leejaehyeok97.configguard.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
+import java.nio.file.Path;
+
 /**
  * 키가 요구되거나 제공된 위치.
  *
@@ -24,6 +27,14 @@ public record SourceLocation(String file, int line) {
   public String fileName() {
     int slash = file.lastIndexOf('/');
     return slash < 0 ? file : file.substring(slash + 1);
+  }
+
+  /** {@code projectDir} 기준 상대 경로를 {@code /} 구분자로. 프로젝트 밖의 파일은 절대 경로. */
+  public static String relativePath(Path projectDir, Path file) {
+    Path base = projectDir.toAbsolutePath().normalize();
+    Path target = file.toAbsolutePath().normalize();
+    Path shown = target.startsWith(base) ? base.relativize(target) : target;
+    return shown.toString().replace(File.separatorChar, '/');
   }
 
   @Override

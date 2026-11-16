@@ -1,0 +1,5 @@
+db:
+  password: SUPER_SECRET_VALUE_123
+  url: jdbc:postgresql://db.internal/app?password=SUPER_SECRET_VALUE_123&user=${DB_USER}
+unused:
+  secret: SUPER_SECRET_VALUE_123

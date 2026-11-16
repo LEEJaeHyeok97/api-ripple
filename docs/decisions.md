@@ -27,3 +27,13 @@
 - [M3] 6.2 YAML 평탄화 — 빈 값 처리가 정해져 있지 않았다 → Spring과 같이 빈 리스트(`[]`)와 null 값은 키를 제공하고, 빈 매핑(`{}`)은 키를 만들지 않는다. 병합 키(`<<`)는 펼친다.
 - [M3] 2장 "값은 절대 출력하지 않는다" — 파서 예외 메시지가 문제 줄을 인용할 수 있다 → YAML 문법 오류는 위치만 담은 `ConfigSourceException`으로 바꾼다. 문서 활성화용 구조 키(on-profile, include, group)의 값만 예외적으로 읽는다(프로필 이름).
 - [M3] 5장 도메인 모델 — "분석 불가"를 담을 타입이 없었다 → `model.Unanalyzable(key, location, message)`을 추가했다. 소스(지원하지 않는 프로필 식)와 M4 추출(SpEL, 동적 키)이 함께 쓰고, M5에서 CG005가 된다.
+- [M4] 6.1 "@NotNull 있고 @Validated → REQUIRED" vs "초기값 있음 → OPTIONAL" — 둘 다 해당하면 어느 쪽인지 정해져 있지 않았다 → OPTIONAL. Spring에서는 초기값이 검증을 통과해 기동이 성공한다.
+- [M4] 6.1 "중첩 클래스 타입 필드 → 재귀" — 중첩 쪽 필드의 `@NotBlank`도 REQUIRED인지 모호했다 → 중첩 필드에 `@Valid`가 있을 때만 검증이 이어진다고 본다. Spring Boot 문서: 프로퍼티가 하나도 없는 중첩 객체를 검증하려면 `@Valid`가 필요하다.
+- [M4] 6.1 "record / 생성자 바인딩" — 일반 클래스에서 생성자 바인딩을 언제 쓰는지 정해져 있지 않았다 → Spring Boot 3 규칙: `@ConstructorBinding` 생성자, 또는 `@Autowired`가 없는 유일한 파라미터 있는 생성자. JavaBean 바인딩은 setter 유무를 보지 않고 static이 아닌 필드를 모두 본다 (Lombok `@Data`/`@Setter`가 흔해서).
+- [M4] 6.1 "Map, List 타입" — 다른 컬렉션 타입이 정해져 있지 않았다 → Map·List·Set·Collection·Iterable과 흔한 구현체, 배열, `Properties`를 같은 규칙(prefix만 OPTIONAL)으로 다룬다. 열거형은 값 하나로 본다.
+- [M4] 6.1 "위 어노테이션이 붙은 클래스/메서드" — 바깥 클래스의 조건도 적용되는지 모호했다 → 키를 요구하는 지점을 감싸는 모든 선언(메서드, 생성자, 클래스, 바깥 클래스)의 조건을 본다. 조건이 여러 개면 바깥쪽부터 쉼표로 이어 이유로 쓴다.
+- [M4] 6.5 UNUSED_KEY — `@ConditionalOnProperty(name = "alarm.push.enabled")`가 읽는 키가 "코드가 요구하지 않는 키"로 잡힐 수 있었다 → 조건 키를 OPTIONAL로 기록해 CG004 오탐을 막는다.
+- [M4] 6.1 Environment — 호출 대상이 정말 Environment인지 판단 기준이 없었다 → 심볼 해석 없이 선언 타입의 단순 이름으로 판단한다(Environment 계열 8개 타입 + `getEnvironment()` 호출). `var`나 다른 타입이면 건너뛴다. `System.getProperty`, `Properties.getProperty` 오탐을 막기 위해서다.
+- [M4] 6.1 — `lombok.Value`와 Spring `@Value`가 같은 단순 이름을 쓴다 → 파일이 `lombok.Value`를 import하면 그 파일의 `@Value`는 무시한다.
+- [M4] 6.1 — 문법 오류가 있는 Java 파일 처리가 정해져 있지 않았다 → 그 파일만 빼고 CG005로 알린다. 파서 메시지는 코드 조각을 인용할 수 있어서 쓰지 않는다.
+- [M4] 3장 — `javaparser-symbol-solver-core`를 쓰라고 했지만 심볼 해석은 이름 기반 휴리스틱으로 충분했다 → 의존성은 명세대로 두되 심볼 솔버 API는 쓰지 않는다. 외부 라이브러리 클래스(Spring 등)가 클래스패스에 없어서 해석이 어차피 실패한다.

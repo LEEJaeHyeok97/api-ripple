@@ -1,0 +1,4 @@
+app:
+  mail:
+    timeout: 60
+    legacy-flag: true

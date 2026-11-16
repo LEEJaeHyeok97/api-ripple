@@ -6,7 +6,7 @@ plugins {
 }
 
 // 릴리스 워크플로가 태그에서 버전을 넘긴다: -PreleaseVersion=0.1.0
-val projectVersion = providers.gradleProperty("releaseVersion").getOrElse("0.1.0-SNAPSHOT")
+val projectVersion = providers.gradleProperty("releaseVersion").getOrElse("0.2.0-SNAPSHOT")
 
 allprojects {
     group = "io.github.leejaehyeok97"

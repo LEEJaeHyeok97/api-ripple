@@ -13,4 +13,4 @@
 - [ ] 동작을 바꿨다면 `docs/reference`를 같은 PR에서 갱신했다
 - [ ] 명세가 모호해서 해석을 정했다면 `docs/decisions.md`에 적었다
 - [ ] 설정 값(secret)이 코드, 테스트 출력, 문서 예시에 들어가지 않았다
-- [ ] README Roadmap / CHANGELOG `Unreleased`를 갱신했다 (마일스톤 완료 시)
+- [ ] 사용자에게 보이는 변경이면 CHANGELOG `Unreleased`를 갱신했다

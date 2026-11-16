@@ -17,9 +17,11 @@ import java.util.Set;
 public final class ConfigSources {
 
   private final List<ConfigDocument> documents;
+  private final String primaryRoot;
 
-  private ConfigSources(List<ConfigDocument> documents) {
+  private ConfigSources(List<ConfigDocument> documents, String primaryRoot) {
     this.documents = List.copyOf(documents);
+    this.primaryRoot = primaryRoot;
   }
 
   /**
@@ -38,7 +40,26 @@ public final class ConfigSources {
               ? YamlConfigParser.parse(file.path(), display, file.profile())
               : PropertiesConfigParser.parse(file.path(), display, file.profile()));
     }
-    return new ConfigSources(documents);
+    String primaryRoot =
+        resourceRoots.isEmpty()
+            ? "src/main/resources"
+            : SourceLocation.relativePath(projectDir, resourceRoots.get(0));
+    return new ConfigSources(documents, primaryRoot);
+  }
+
+  /**
+   * 프로필에 키를 추가할 때 고칠 파일. 그 프로필의 파일이 이미 있으면 그 파일, 없으면 {@code <리소스 루트>/application-<프로필>.yml}. {@code
+   * default}면 기본 파일.
+   */
+  public String suggestedFile(String profile) {
+    boolean isDefault = profile.equals(ProvidedKey.DEFAULT_PROFILE);
+    for (ConfigDocument doc : documents) {
+      boolean match = isDefault ? doc.fileProfile() == null : profile.equals(doc.fileProfile());
+      if (match) {
+        return doc.file();
+      }
+    }
+    return primaryRoot + (isDefault ? "/application.yml" : "/application-" + profile + ".yml");
   }
 
   /** 지원하지 않는 프로필 식을 써서 건너뛴 문서들. */

@@ -1,0 +1,3 @@
+# PAYMENT_APIKEY → payment.api-key, EXTERNAL_SERVICE_URL(레거시) → external.service-url,
+# APP_OAUTH_CLIENTSECRET → app.oauth.client-secret, mail.senderAddress → mail.sender-address
+prod ERROR CG001 feature.flag-name

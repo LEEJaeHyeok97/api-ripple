@@ -1,0 +1,3 @@
+# 형식: <profile> <SEVERITY> <ruleId> <key>   (키가 없으면 -)
+# payment.fallback-url(${a:${b}}의 b), host, merchant-id(camelCase)는 제공됨. 기본값 있는 키는 보고하지 않는다.
+prod ERROR CG001 payment.api-key

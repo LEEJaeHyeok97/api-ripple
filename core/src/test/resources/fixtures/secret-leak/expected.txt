@@ -1,0 +1,5 @@
+prod ERROR CG001 signing.key
+prod ERROR CG002 DB_USER
+prod INFO CG004 db.url
+prod INFO CG004 unused.secret
+* INFO CG004 legacy.token

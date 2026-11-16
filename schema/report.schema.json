@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/LEEJaeHyeok97/api-ripple/blob/main/schema/report.schema.json",
+  "title": "config-guard report",
+  "description": "config-guard JSON 리포트 (schemaVersion 1). 깨지는 변경은 schemaVersion을 올린다. 설정 값은 어떤 필드에도 들어가지 않는다.",
+  "type": "object",
+  "required": ["schemaVersion", "summary", "findings", "notices"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "const": "1" },
+    "summary": {
+      "type": "object",
+      "required": ["profiles", "errors", "warnings", "infos"],
+      "additionalProperties": false,
+      "properties": {
+        "profiles": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+        "errors": { "type": "integer", "minimum": 0 },
+        "warnings": { "type": "integer", "minimum": 0 },
+        "infos": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "findings": { "type": "array", "items": { "$ref": "#/$defs/finding" } },
+    "notices": { "type": "array", "items": { "$ref": "#/$defs/notice" } }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "required": ["ruleId", "rule", "severity", "profile", "key", "location", "message", "suggestions"],
+      "additionalProperties": false,
+      "properties": {
+        "ruleId": { "enum": ["CG001", "CG002", "CG003", "CG004", "CG005"], "description": "규칙 ID. 공개 후 의미를 바꾸지 않는다. docs/reference/rules/<ruleId>.md" },
+        "rule": { "enum": ["MISSING_KEY", "MISSING_ENV_VAR", "CONDITIONAL_KEY", "UNUSED_KEY", "UNANALYZABLE"] },
+        "severity": { "enum": ["ERROR", "WARNING", "INFO"] },
+        "profile": { "type": "string", "minLength": 1, "description": "대상 프로필. 프로필과 무관한 결과는 \"*\"." },
+        "key": { "type": "string", "description": "정규형 설정 키. CG002는 환경변수 이름. 알 수 없으면 빈 문자열." },
+        "location": { "$ref": "#/$defs/location" },
+        "message": { "type": "string" },
+        "suggestions": { "type": "array", "items": { "$ref": "#/$defs/suggestion" } }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "severity": { "const": "ERROR" } } },
+          "then": { "properties": { "suggestions": { "minItems": 1 } } }
+        }
+      ]
+    },
+    "location": {
+      "type": ["object", "null"],
+      "required": ["file", "line"],
+      "additionalProperties": false,
+      "properties": {
+        "file": { "type": "string", "minLength": 1, "description": "프로젝트 루트 기준 상대 경로, / 구분" },
+        "line": { "type": "integer", "minimum": 0, "description": "1부터 시작. 모르면 0." }
+      }
+    },
+    "suggestion": {
+      "type": "object",
+      "required": ["kind", "file", "target"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["ADD_YAML_KEY", "ADD_ENV_VAR", "ADD_DEFAULT_VALUE", "IGNORE_KEY"] },
+        "file": { "type": ["string", "null"] },
+        "target": { "type": "string", "minLength": 1 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "kind": { "const": "ADD_ENV_VAR" } } },
+          "then": { "properties": { "file": { "type": "null" } } }
+        },
+        {
+          "if": { "properties": { "kind": { "enum": ["ADD_YAML_KEY", "ADD_DEFAULT_VALUE"] } } },
+          "then": { "properties": { "file": { "type": "string" } } }
+        }
+      ]
+    },
+    "notice": {
+      "type": "object",
+      "required": ["code", "profile", "message"],
+      "additionalProperties": false,
+      "properties": {
+        "code": { "enum": ["ENV_CHECK_SKIPPED"] },
+        "profile": { "type": "string", "minLength": 1 },
+        "message": { "type": "string" }
+      }
+    }
+  }
+}

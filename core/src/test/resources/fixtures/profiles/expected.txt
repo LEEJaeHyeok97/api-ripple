@@ -1,0 +1,9 @@
+# dev: include(common) 따라감, prod 문서·group(prod-db)은 적용 안 됨
+dev ERROR CG001 app.region
+dev ERROR CG001 db.pool.max-size
+dev ERROR CG001 payment.api-key
+dev INFO CG004 app.debug-mode
+# prod: on-profile 문서 + group 멤버(prod-db) 병합, payment.api-key의 ${PAYMENT_API_KEY}는 env 목록에 있음
+prod ERROR CG001 common.tracing
+# "!prod" 문서는 분석하지 않고 알린다
+* INFO CG005 spring.config.activate.on-profile

@@ -1,0 +1,6 @@
+# SpEL, 다른 파일 상수, 동적 플레이스홀더 이름, Environment 동적 키, 파싱 실패. 추측하지 않고 INFO로 알린다.
+* INFO CG005 -
+* INFO CG005 -
+* INFO CG005 -
+* INFO CG005 -
+* INFO CG005 -

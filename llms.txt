@@ -1,0 +1,36 @@
+# config-guard
+
+> Spring Boot 애플리케이션의 프로필별 설정 누락을 배포 전에 CI에서 잡는 정적 분석 도구. 코드가 요구하는 설정 키(@Value, @ConfigurationProperties, Environment)와 프로필별로 제공되는 키(application-*.yml, 환경변수 이름 목록)를 비교한다. 설정 값은 읽거나 출력하지 않는다. CLI, Gradle 플러그인, GitHub Action으로 쓴다. 저장소: https://github.com/LEEJaeHyeok97/api-ripple
+
+## 쓰는 법
+
+- [README](README.md): 문제 정의, 설치, 출력 예시, 한계
+- [시작하기](docs/guide/getting-started.md): 플러그인 적용, 환경변수 목록, 결과 읽기, 오탐 처리
+- [CI 연동](docs/guide/ci-integration.md): GitHub Action(PR 코멘트 갱신), 다른 CI에서 CLI
+- [AI 에이전트와 쓰기](docs/guide/using-with-ai-agents.md): JSON 출력, Suggestion 적용 루프, 하지 말 것
+- [Agent Skill](skills/config-guard/SKILL.md): 에이전트용 작업 절차
+
+## 레퍼런스
+
+- [CLI](docs/reference/cli.md): check/explain/rules, 옵션, 종료 코드 0/1/2/3, stdout/stderr
+- [Gradle DSL](docs/reference/gradle-dsl.md): configGuard 확장, configGuardCheck 태스크
+- [JSON 리포트](docs/reference/json-report.md): 필드, 정렬, Suggestion 종류
+- [JSON 스키마](schema/report.schema.json): schemaVersion 1
+- [규칙 CG001 MISSING_KEY](docs/reference/rules/CG001.md)
+- [규칙 CG002 MISSING_ENV_VAR](docs/reference/rules/CG002.md)
+- [규칙 CG003 CONDITIONAL_KEY](docs/reference/rules/CG003.md)
+- [규칙 CG004 UNUSED_KEY](docs/reference/rules/CG004.md)
+- [규칙 CG005 UNANALYZABLE](docs/reference/rules/CG005.md)
+- [키 정규화](docs/reference/key-normalization.md): relaxed binding, 환경변수 ↔ 키
+- [설정 소스](docs/reference/config-sources.md): 읽는 파일, 프로필 병합, 플레이스홀더
+- [키 추출](docs/reference/key-extraction.md): @Value, Environment, @ConfigurationProperties, 조건부 강등
+- [GitHub Action](action/README.md): 입력, 출력, 권한
+
+## 개발
+
+- [CLAUDE.md](CLAUDE.md): 이 저장소를 수정할 때의 규칙, 빌드 명령, 모듈 역할
+- [명세](docs/spec.md): 기준 문서
+- [설계 결정](docs/decisions.md): 명세가 모호했던 부분과 정한 해석
+- [범위 밖 아이디어](docs/ideas.md)
+- [릴리스 절차](docs/releasing.md)
+- [CHANGELOG](CHANGELOG.md)

@@ -20,3 +20,5 @@
 - CLI `config-guard`: `check`(console/markdown/json, `--fail-on`, `--ignore`, `--env-file`, `--framework-prefix`), `explain`, `rules`, `--version`; 고정 종료 코드(0/1/2/3), stdout/stderr 분리, 단일 실행 jar(`:cli:fatJar`), 레퍼런스 문서 `docs/reference/cli.md` (M6)
 - Gradle 플러그인 `io.github.leejaehyeok97.config-guard`: `configGuard` DSL, `configGuardCheck` 태스크(verification, 증분 빌드·빌드 캐시·configuration cache 호환), report.md/report.json, TestKit 테스트, CLI와 JSON 동일성 테스트, 레퍼런스 문서 `docs/reference/gradle-dsl.md` (M7)
 - GitHub Action `action/`: `configGuardCheck --continue` 실행, PR 코멘트 게시·갱신(마커), 잡 요약, 종료 코드 전달. 데모 앱 `samples/demo`(ERROR 2, WARNING 1), e2e 워크플로(CLI·Action 실행, 두 JSON 동일성) (M8)
+- 문서: README(설치·출력 예시·AI 에이전트·한계·설계 결정), 가이드(`docs/guide/`: 시작하기, CI 연동, AI 에이전트와 쓰기), Agent Skill `skills/config-guard/SKILL.md`, `llms.txt`, 릴리스 절차 `docs/releasing.md` (M9)
+- 릴리스 설정: 태그 푸시 시 CLI jar를 GitHub Release에 첨부하는 워크플로, Gradle Plugin Portal 배포 설정(core를 플러그인 jar에 포함, artifactId `config-guard-gradle-plugin`) (M9)

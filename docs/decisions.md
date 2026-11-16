@@ -65,3 +65,9 @@
 - [M8] 9장 "samples/ 앱에서 ERROR 2건, WARNING 1건" — 프로필이 정해져 있지 않았다 → dev, prod를 검사하고 dev는 문제 없음, prod에서 정확히 ERROR 2(CG001 `payment.api-key`, CG002 `DB_URL`), WARNING 1(CG003 `alarm.push.fcm-key`), INFO 0이 나오게 만들었다. `src/test`에 넣은 키가 보고되지 않는지도 같은 테스트로 확인한다.
 - [M8] 6.12 "의존성 버전은 전부 libs.versions.toml에서만" — 샘플은 독립 빌드라 카탈로그를 따로 둘 수 있었다 → 샘플이 루트 카탈로그를 `from(files("../../gradle/libs.versions.toml"))`로 공유하고, Spring Boot 플러그인 버전도 루트 카탈로그 `[plugins]`에 둔다. 플러그인은 `includeBuild("../..")`로 소스에서 가져온다.
 - [M8] 6.12 e2e — 샘플은 의도적으로 실패한다 → e2e 잡은 "실패해야 통과"다: CLI와 Action 모두 종료 코드 1, 요약 숫자 일치, 두 JSON이 바이트 단위로 같은지(`diff`) 확인한다.
+- [M9] 6.14 "Plugin Portal 배포는 설정만" — 플러그인이 `core` 프로젝트에 의존하는데 Plugin Portal은 플러그인 아티팩트만 받는다 → `core` 클래스를 플러그인 jar에 넣고, core의 외부 의존성은 플러그인 POM에 선언한다. shadow 플러그인은 표에 없어 Gradle 기본 `Jar`로 합친다. `publishToMavenLocal` 후 별도 프로젝트에서 적용되는 것을 확인했다.
+- [M9] 6.13 "30초 설치" — 아직 릴리스(Release jar, Plugin Portal)가 없어 명세의 한 줄 설치가 동작하지 않는다 → README에 "릴리스 전" 방법(소스 빌드, `publishToMavenLocal` + `mavenLocal()`)과 릴리스 후 방법을 함께 적었다. 동작하지 않는 설치 방법만 보여 주지 않기 위해서다.
+- [M9] 6.14 릴리스 버전 — 빌드 버전이 `0.1.0-SNAPSHOT`으로 고정돼 있었다 → 릴리스 워크플로가 태그(`v0.1.0`)에서 `-PreleaseVersion=0.1.0`을 넘긴다. 로컬 기본값은 SNAPSHOT 그대로다.
+- [M9] 6.10 Agent Skill 형식 — 형식이 정해져 있지 않았다 → Claude Code Agent Skill 형식(frontmatter `name`, `description` + 본문)으로 쓰고, `.claude/skills/`에 복사해 쓰는 방법을 가이드에 적었다.
+- [M9] 6.13 "문서의 코드 예시는 fixture에서 가져온 실제 코드" — 가이드의 설치 스니펫(build.gradle.kts, 워크플로)은 fixture에 없다 → 분석 대상 코드·설정·출력 예시는 fixture와 samples/demo의 실제 파일과 실제 출력만 쓰고, 설치·설정 스니펫은 TestKit 테스트와 e2e 워크플로에서 실제로 쓰는 형태를 따른다.
+- [M9] 플러그인 artifactId — 기본값이 프로젝트 이름(`gradle-plugin`)이라 너무 일반적이다 → `config-guard-gradle-plugin`으로 바꿨다. 플러그인 ID는 그대로다.

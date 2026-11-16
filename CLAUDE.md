@@ -35,7 +35,9 @@
 | `action/` | GitHub composite action (`action.yml`, `comment.sh`) | M8~ |
 | `samples/demo/` | 일부러 prod 설정을 빠뜨린 Spring Boot 앱 (ERROR 2, WARNING 1). 독립 빌드, 플러그인은 `includeBuild("../..")` | M8~ |
 | `schema/` | JSON 리포트 스키마. 깨지는 변경이면 `schemaVersion`을 올린다 | M5~ |
-| `docs/` | 명세, 설계 결정, 가이드, 레퍼런스 | M0~ |
+| `skills/config-guard/` | LLM 에이전트용 Agent Skill. CLI 옵션·규칙이 바뀌면 함께 고친다 | M9~ |
+| `docs/` | 명세, 설계 결정, 가이드(`guide/`), 레퍼런스(`reference/`), 릴리스 절차 | M0~ |
+| `llms.txt` | 문서 색인. 문서를 추가·이동하면 갱신한다 | M9~ |
 
 ## 작업 흐름
 
@@ -52,3 +54,4 @@
 - CI를 통과시키려고 테스트를 지우거나 `@Disabled` 처리하지 않는다. 막히면 멈추고 사람에게 묻는다.
 - 명세 3장 표에 없는 외부 라이브러리를 추가하지 않는다. 필요하면 먼저 이유를 설명한다.
 - 반쯤 만든 기능을 main에 노출하지 않는다. 미완성 기능은 README Roadmap에만 적는다.
+- 릴리스(태그 푸시, Plugin Portal 배포, Action 태그 이동)는 사람이 결정한다. 절차: [docs/releasing.md](docs/releasing.md).

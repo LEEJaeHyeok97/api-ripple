@@ -11,3 +11,5 @@
 - 다른 파일의 상수까지 따라가는 키 해석 (명세는 같은 파일까지로 제한) (M4)
 - `@ConfigurationProperties` 필드의 `@Name` 어노테이션으로 바뀐 키 이름 반영 (M4)
 - `Environment.resolvePlaceholders` / `resolveRequiredPlaceholders`, `containsProperty` 분석 (M4)
+- GitHub Action에 `report-path` 입력 추가 — 멀티 모듈에서 하위 모듈의 리포트로 코멘트를 달 수 있게 (M9)
+- 환경변수 목록을 Helm values / Terraform / ECS task definition에서 바로 읽기 (M9)

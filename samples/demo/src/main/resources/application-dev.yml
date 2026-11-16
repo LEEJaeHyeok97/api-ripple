@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:demo
+alarm:
+  push:
+    enabled: true
+    fcm-key: ${FCM_KEY}

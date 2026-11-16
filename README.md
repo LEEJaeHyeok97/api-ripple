@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/ci.yml)
 [![e2e](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/e2e.yml/badge.svg?branch=main)](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/e2e.yml)
-[![status](https://img.shields.io/badge/status-0.1.0%20pre--release-orange)](#roadmap)
+[![release](https://img.shields.io/github/v/release/LEEJaeHyeok97/api-ripple)](https://github.com/LEEJaeHyeok97/api-ripple/releases)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 Spring Boot 애플리케이션의 **환경별 설정 누락을 배포 전에 CI에서 잡아내는** 정적 분석 도구. CLI, Gradle 플러그인, GitHub Action으로 쓴다.
@@ -26,28 +26,26 @@ Spring Boot 애플리케이션의 **환경별 설정 누락을 배포 전에 CI�
 
 ## 30초 설치
 
-> 0.1.0은 아직 릴리스 전이다. 아래 "릴리스 전" 방법은 이 저장소를 받아서 쓴다. 릴리스 절차는 [docs/releasing.md](docs/releasing.md).
-
 ### CLI
 
-```bash
-# 릴리스 후: GitHub Releases에서 config-guard-<version>-all.jar를 받는다
-# 릴리스 전: 소스에서 빌드
-git clone https://github.com/LEEJaeHyeok97/api-ripple.git && cd api-ripple
-./gradlew :cli:fatJar      # → cli/build/libs/config-guard-0.1.0-SNAPSHOT-all.jar
+[Releases](https://github.com/LEEJaeHyeok97/api-ripple/releases)에서 jar 하나를 받는다. Java 17 이상이면 된다.
 
-java -jar cli/build/libs/config-guard-0.1.0-SNAPSHOT-all.jar check /path/to/your-app --profile prod
+```bash
+curl -LO https://github.com/LEEJaeHyeok97/api-ripple/releases/download/v0.1.0/config-guard-0.1.0-all.jar
+java -jar config-guard-0.1.0-all.jar check /path/to/your-app --profile prod
 ```
 
 ### Gradle 플러그인
 
+> Gradle Plugin Portal 배포 전이다. 그동안은 v0.1.0 소스를 로컬 Maven 저장소에 배포해서 쓴다 ([절차](docs/releasing.md)).
+
 ```bash
-# 릴리스 전: 이 저장소에서 로컬 Maven 저장소로 배포
-./gradlew :gradle-plugin:publishToMavenLocal
+git clone --branch v0.1.0 https://github.com/LEEJaeHyeok97/api-ripple.git && cd api-ripple
+./gradlew :gradle-plugin:publishToMavenLocal -PreleaseVersion=0.1.0
 ```
 
 ```kotlin
-// settings.gradle.kts (릴리스 전에만 필요)
+// settings.gradle.kts (Plugin Portal 배포 전에만 필요)
 pluginManagement {
     repositories {
         mavenLocal()
@@ -57,7 +55,7 @@ pluginManagement {
 
 // build.gradle.kts
 plugins {
-    id("io.github.leejaehyeok97.config-guard") version "0.1.0-SNAPSHOT" // Plugin Portal 배포 후: "0.1.0"
+    id("io.github.leejaehyeok97.config-guard") version "0.1.0"
 }
 
 configGuard {
@@ -80,7 +78,7 @@ steps:
   - uses: actions/checkout@v4
   - uses: actions/setup-java@v4
     with: { distribution: temurin, java-version: "21" }
-  - uses: LEEJaeHyeok97/api-ripple/action@main   # v0 태그 이후: @v0
+  - uses: LEEJaeHyeok97/api-ripple/action@v0
     with:
       working-directory: .
 ```
@@ -175,7 +173,8 @@ config-guard check . --profile prod --env-file prod=deploy/prod.env.keys --forma
 - [x] **M8** GitHub Action + 샘플 앱 + e2e
 - [x] **M9** 문서: 가이드, 규칙 레퍼런스, Agent Skill, llms.txt, 릴리스 설정
 - [x] **M10** (선택) Agent Skill 효과 평가 → [결과](evals/RESULTS.md): 성공률 차이 없음(5/5 대 5/5), 탐색 실행만 감소
-- [ ] 첫 릴리스 (GitHub Release CLI jar, Plugin Portal 배포, Action `v0` 태그) — 사람이 결정
+- [x] 첫 릴리스 [v0.1.0](https://github.com/LEEJaeHyeok97/api-ripple/releases/tag/v0.1.0): CLI jar, Action `v0` 태그
+- [ ] Gradle Plugin Portal 배포 (API 키가 필요해 사람이 실행)
 
 ## 개발 방식
 

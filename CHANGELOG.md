@@ -5,6 +5,8 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-16
+
 ### Added
 
 - 프로젝트 문서: README, 명세(`docs/spec.md`), `CLAUDE.md`, 설계 결정·아이디어·회고 문서 틀 (M0)
@@ -24,6 +26,5 @@
 - 릴리스 설정: 태그 푸시 시 CLI jar를 GitHub Release에 첨부하는 워크플로, Gradle Plugin Portal 배포 설정(core를 플러그인 jar에 포함, artifactId `config-guard-gradle-plugin`) (M9)
 - Agent Skill 평가 `evals/`: 과제 프로젝트 5개, 실행·채점 스크립트(`run.sh`, `score.py`, `report.py`), 결과 `evals/RESULTS.md` (M10)
 
-### Changed
-
-- JSON 리포트 스키마 테스트가 직접 만든 검증기 대신 networknt json-schema-validator(JSON Schema 2020-12)를 쓴다
+[Unreleased]: https://github.com/LEEJaeHyeok97/api-ripple/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/LEEJaeHyeok97/api-ripple/releases/tag/v0.1.0

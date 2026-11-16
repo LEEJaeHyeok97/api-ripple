@@ -4,17 +4,17 @@ Spring Boot 프로젝트에 config-guard를 붙이고, 첫 결과를 읽고 고�
 
 ## 1. 플러그인 적용
 
-0.1.0 릴리스 전에는 이 저장소에서 로컬 Maven 저장소로 배포해서 쓴다.
+Gradle Plugin Portal 배포 전에는 v0.1.0 소스를 로컬 Maven 저장소로 배포해서 쓴다.
 
 ```bash
-git clone https://github.com/LEEJaeHyeok97/api-ripple.git
-cd api-ripple && ./gradlew :gradle-plugin:publishToMavenLocal
+git clone --branch v0.1.0 https://github.com/LEEJaeHyeok97/api-ripple.git
+cd api-ripple && ./gradlew :gradle-plugin:publishToMavenLocal -PreleaseVersion=0.1.0
 ```
 
 내 프로젝트:
 
 ```kotlin
-// settings.gradle.kts — 릴리스 전에만
+// settings.gradle.kts — Plugin Portal 배포 전에만
 pluginManagement {
     repositories {
         mavenLocal()
@@ -26,7 +26,7 @@ pluginManagement {
 ```kotlin
 // build.gradle.kts
 plugins {
-    id("io.github.leejaehyeok97.config-guard") version "0.1.0-SNAPSHOT"
+    id("io.github.leejaehyeok97.config-guard") version "0.1.0"
 }
 
 configGuard {

@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     implementation(libs.snakeyaml)
+    implementation(libs.javaparser.symbol.solver)
 }
 
 jacoco {

@@ -45,8 +45,8 @@ tasks.pluginUnderTestMetadata {
 
 // 배포 설정만 해 둔다. 실제 배포(./gradlew :gradle-plugin:publishPlugins)는 사람이 결정한다 (명세 6.14).
 gradlePlugin {
-    website = "https://github.com/LEEJaeHyeok97/api-ripple"
-    vcsUrl = "https://github.com/LEEJaeHyeok97/api-ripple.git"
+    website = "https://github.com/LEEJaeHyeok97/config-guard"
+    vcsUrl = "https://github.com/LEEJaeHyeok97/config-guard.git"
     plugins {
         register("configGuard") {
             id = "io.github.leejaehyeok97.config-guard"

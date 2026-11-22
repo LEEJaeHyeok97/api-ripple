@@ -21,7 +21,7 @@ jobs:
         with:
           distribution: temurin
           java-version: "21"
-      - uses: LEEJaeHyeok97/api-ripple/action@v0
+      - uses: LEEJaeHyeok97/config-guard/action@v0
         with:
           working-directory: .
           gradle-task: configGuardCheck
@@ -46,7 +46,7 @@ Settings → Branches(또는 Rulesets)에서 이 잡을 required status check로
 Action은 `working-directory`의 `build/reports/config-guard/`를 읽는다. 플러그인을 하위 모듈(`app/`)에 적용했다면 그 모듈을 루트로 하는 빌드가 아니므로 다음처럼 한다.
 
 ```yaml
-- uses: LEEJaeHyeok97/api-ripple/action@v0
+- uses: LEEJaeHyeok97/config-guard/action@v0
   with:
     gradle-task: ":app:configGuardCheck"
     comment: false        # 리포트 경로가 루트가 아니라서 코멘트는 직접 단다

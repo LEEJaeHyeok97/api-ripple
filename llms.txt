@@ -1,6 +1,6 @@
 # config-guard
 
-> Spring Boot 애플리케이션의 프로필별 설정 누락을 배포 전에 CI에서 잡는 정적 분석 도구. 코드가 요구하는 설정 키(@Value, @ConfigurationProperties, Environment)와 프로필별로 제공되는 키(application-*.yml, 환경변수 이름 목록)를 비교한다. 설정 값은 읽거나 출력하지 않는다. CLI, Gradle 플러그인, GitHub Action으로 쓴다. 저장소: https://github.com/LEEJaeHyeok97/api-ripple
+> Spring Boot 애플리케이션의 프로필별 설정 누락을 배포 전에 CI에서 잡는 정적 분석 도구. 코드가 요구하는 설정 키(@Value, @ConfigurationProperties, Environment)와 프로필별로 제공되는 키(application-*.yml, 환경변수 이름 목록)를 비교한다. 설정 값은 읽거나 출력하지 않는다. CLI, Gradle 플러그인, GitHub Action으로 쓴다. 저장소: https://github.com/LEEJaeHyeok97/config-guard
 
 ## 쓰는 법
 

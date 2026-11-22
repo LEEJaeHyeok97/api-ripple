@@ -13,7 +13,7 @@ steps:
     with:
       distribution: temurin
       java-version: "21"
-  - uses: LEEJaeHyeok97/api-ripple/action@v0
+  - uses: LEEJaeHyeok97/config-guard/action@v0
     with:
       working-directory: .          # gradlew가 있는 디렉터리
       gradle-task: configGuardCheck

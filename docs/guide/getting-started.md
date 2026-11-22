@@ -7,8 +7,8 @@ Spring Boot 프로젝트에 config-guard를 붙이고, 첫 결과를 읽고 고�
 Gradle Plugin Portal 배포 전에는 v0.1.0 소스를 로컬 Maven 저장소로 배포해서 쓴다.
 
 ```bash
-git clone --branch v0.1.0 https://github.com/LEEJaeHyeok97/api-ripple.git
-cd api-ripple && ./gradlew :gradle-plugin:publishToMavenLocal -PreleaseVersion=0.1.0
+git clone --branch v0.1.0 https://github.com/LEEJaeHyeok97/config-guard.git
+cd config-guard && ./gradlew :gradle-plugin:publishToMavenLocal -PreleaseVersion=0.1.0
 ```
 
 내 프로젝트:

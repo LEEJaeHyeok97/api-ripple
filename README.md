@@ -1,8 +1,8 @@
 # config-guard
 
-[![CI](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/ci.yml)
-[![e2e](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/e2e.yml/badge.svg?branch=main)](https://github.com/LEEJaeHyeok97/api-ripple/actions/workflows/e2e.yml)
-[![release](https://img.shields.io/github/v/release/LEEJaeHyeok97/api-ripple)](https://github.com/LEEJaeHyeok97/api-ripple/releases)
+[![CI](https://github.com/LEEJaeHyeok97/config-guard/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/LEEJaeHyeok97/config-guard/actions/workflows/ci.yml)
+[![e2e](https://github.com/LEEJaeHyeok97/config-guard/actions/workflows/e2e.yml/badge.svg?branch=main)](https://github.com/LEEJaeHyeok97/config-guard/actions/workflows/e2e.yml)
+[![release](https://img.shields.io/github/v/release/LEEJaeHyeok97/config-guard)](https://github.com/LEEJaeHyeok97/config-guard/releases)
 [![license](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 Spring Boot 애플리케이션의 **환경별 설정 누락을 배포 전에 CI에서 잡아내는** 정적 분석 도구. CLI, Gradle 플러그인, GitHub Action으로 쓴다.
@@ -29,7 +29,7 @@ config-guard는 애플리케이션을 띄우지 않고 이 두 집합을 프로�
 Java 17 이상이면 jar 하나로 돌아간다.
 
 ```bash
-curl -LO https://github.com/LEEJaeHyeok97/api-ripple/releases/download/v0.1.0/config-guard-0.1.0-all.jar
+curl -LO https://github.com/LEEJaeHyeok97/config-guard/releases/download/v0.1.0/config-guard-0.1.0-all.jar
 java -jar config-guard-0.1.0-all.jar check /path/to/your-app --profile prod
 ```
 
@@ -56,7 +56,7 @@ configGuard {
 <summary>로컬 Maven 저장소에 배포하기 (Plugin Portal 배포 전까지)</summary>
 
 ```bash
-git clone --branch v0.1.0 https://github.com/LEEJaeHyeok97/api-ripple.git && cd api-ripple
+git clone --branch v0.1.0 https://github.com/LEEJaeHyeok97/config-guard.git && cd config-guard
 ./gradlew :gradle-plugin:publishToMavenLocal -PreleaseVersion=0.1.0
 ```
 
@@ -84,7 +84,7 @@ steps:
   - uses: actions/checkout@v4
   - uses: actions/setup-java@v4
     with: { distribution: temurin, java-version: "21" }
-  - uses: LEEJaeHyeok97/api-ripple/action@v0
+  - uses: LEEJaeHyeok97/config-guard/action@v0
 ```
 
 ## 출력 예시
@@ -101,7 +101,7 @@ config-guard: prod
 2 errors, 1 warning, 0 info
 ```
 
-PR 코멘트는 프로필별 표로 나온다. 실제 예: [#17](https://github.com/LEEJaeHyeok97/api-ripple/pull/17).
+PR 코멘트는 프로필별 표로 나온다. 실제 예: [#17](https://github.com/LEEJaeHyeok97/config-guard/pull/17).
 
 | 규칙 | 심각도 | 잡는 것 |
 |---|---|---|

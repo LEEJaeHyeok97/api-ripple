@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/LEEJaeHyeok97/api-ripple/blob/main/schema/report.schema.json",
+  "$id": "https://github.com/LEEJaeHyeok97/config-guard/blob/main/schema/report.schema.json",
   "title": "config-guard report",
   "description": "config-guard JSON 리포트 (schemaVersion 1). 깨지는 변경은 schemaVersion을 올린다. 설정 값은 어떤 필드에도 들어가지 않는다.",
   "type": "object",

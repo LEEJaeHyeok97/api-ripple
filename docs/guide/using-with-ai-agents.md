@@ -14,7 +14,7 @@ config-guard는 LLM 에이전트가 사람에게 묻지 않고 설정 누락을 
 Claude Code라면 Skill을 프로젝트에 복사한다.
 
 ```bash
-mkdir -p .claude/skills && cp -r path/to/api-ripple/skills/config-guard .claude/skills/
+mkdir -p .claude/skills && cp -r path/to/config-guard/skills/config-guard .claude/skills/
 ```
 
 ## 수정 루프

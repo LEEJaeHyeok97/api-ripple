@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- 저장소 이름을 `api-ripple`에서 `config-guard`로 바꿨다. Action 경로는 `LEEJaeHyeok97/config-guard/action@v0`이다. 옛 주소는 GitHub가 새 주소로 넘겨 준다.
+
 ## [0.1.0] - 2026-11-16
 
 ### Added
@@ -26,5 +30,5 @@
 - 릴리스 설정: 태그 푸시 시 CLI jar를 GitHub Release에 첨부하는 워크플로, Gradle Plugin Portal 배포 설정(core를 플러그인 jar에 포함, artifactId `config-guard-gradle-plugin`) (M9)
 - Agent Skill 평가 `evals/`: 과제 프로젝트 5개, 실행·채점 스크립트(`run.sh`, `score.py`, `report.py`), 결과 `evals/RESULTS.md` (M10)
 
-[Unreleased]: https://github.com/LEEJaeHyeok97/api-ripple/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/LEEJaeHyeok97/api-ripple/releases/tag/v0.1.0
+[Unreleased]: https://github.com/LEEJaeHyeok97/config-guard/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/LEEJaeHyeok97/config-guard/releases/tag/v0.1.0

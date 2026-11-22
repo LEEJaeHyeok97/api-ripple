@@ -29,17 +29,15 @@ config-guard는 애플리케이션을 띄우지 않고 이 두 집합을 프로�
 Java 17 이상이면 jar 하나로 돌아간다.
 
 ```bash
-curl -LO https://github.com/LEEJaeHyeok97/config-guard/releases/download/v0.1.0/config-guard-0.1.0-all.jar
-java -jar config-guard-0.1.0-all.jar check /path/to/your-app --profile prod
+curl -LO https://github.com/LEEJaeHyeok97/config-guard/releases/download/v0.1.1/config-guard-0.1.1-all.jar
+java -jar config-guard-0.1.1-all.jar check /path/to/your-app --profile prod
 ```
 
 ### Gradle 플러그인
 
-> 아직 Gradle Plugin Portal 배포 전이다. 아래 접힌 절차로 로컬 Maven 저장소에 먼저 배포해야 이 설정이 동작한다.
-
 ```kotlin
 plugins {
-    id("io.github.leejaehyeok97.config-guard") version "0.1.0"
+    id("io.github.leejaehyeok97.config-guard") version "0.1.1"
 }
 
 configGuard {
@@ -51,26 +49,6 @@ configGuard {
 ```bash
 ./gradlew configGuardCheck
 ```
-
-<details>
-<summary>로컬 Maven 저장소에 배포하기 (Plugin Portal 배포 전까지)</summary>
-
-```bash
-git clone --branch v0.1.0 https://github.com/LEEJaeHyeok97/config-guard.git && cd config-guard
-./gradlew :gradle-plugin:publishToMavenLocal -PreleaseVersion=0.1.0
-```
-
-```kotlin
-// settings.gradle.kts
-pluginManagement {
-    repositories {
-        mavenLocal()
-        gradlePluginPortal()
-    }
-}
-```
-
-</details>
 
 ### GitHub Action
 
@@ -118,7 +96,7 @@ PR 코멘트는 프로필별 표로 나온다. 실제 예: [#17](https://github.
 에이전트가 사람에게 묻지 않고 고칠 수 있게 만들었다.
 
 ```bash
-java -jar config-guard-0.1.0-all.jar check . --profile prod --env-file prod=deploy/prod.env.keys --format json
+java -jar config-guard-0.1.1-all.jar check . --profile prod --env-file prod=deploy/prod.env.keys --format json
 ```
 
 - **안정적인 JSON**: stdout에는 JSON만 나온다. [스키마](schema/report.schema.json)(`schemaVersion: "1"`)를 공개한다.
@@ -153,8 +131,6 @@ Skill 유무에 따른 에이전트 수정 결과는 [evals/RESULTS.md](evals/RE
 - [CLAUDE.md](CLAUDE.md): LLM이 이 저장소에서 작업할 때 따르는 규칙
 - [설계 결정](docs/decisions.md): 명세가 모호했던 부분과 정한 해석. 기준은 "Spring Boot 실제 동작과 같게"
 - [회고](docs/retrospective/spec-driven-dev.md): LLM이 명세를 잘못 이해했던 사례와, 명세를 어떻게 고쳤어야 했는지
-
-다음 할 일: Gradle Plugin Portal 배포.
 
 ## License
 

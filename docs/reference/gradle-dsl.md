@@ -2,7 +2,7 @@
 
 ```kotlin
 plugins {
-    id("io.github.leejaehyeok97.config-guard") version "0.1.0"
+    id("io.github.leejaehyeok97.config-guard") version "0.1.1"
 }
 
 configGuard {

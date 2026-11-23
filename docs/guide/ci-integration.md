@@ -61,7 +61,7 @@ Action은 `working-directory`의 `build/reports/config-guard/`를 읽는다. 플
 Gradle 없이도 CLI jar 하나로 돌릴 수 있다.
 
 ```bash
-java -jar config-guard-0.1.0-all.jar check . \
+java -jar config-guard-0.1.1-all.jar check . \
   --profile dev --profile prod \
   --env-file prod=deploy/prod.env.keys \
   --format markdown > config-guard.md

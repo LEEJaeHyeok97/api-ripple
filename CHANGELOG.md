@@ -5,6 +5,16 @@
 
 ## [Unreleased]
 
+### Added
+
+- 영어 문서: `README.md`를 영어로 쓰고 한국어 README는 `README.ko.md`로 옮겼다. Gradle DSL 레퍼런스 영어판 `docs/reference/gradle-dsl.en.md`를 추가했다.
+
+## [0.1.1] - 2026-11-22
+
+### Added
+
+- Gradle 플러그인을 Gradle Plugin Portal에 배포했다. `mavenLocal()` 없이 `plugins { id("io.github.leejaehyeok97.config-guard") version "0.1.1" }`로 쓴다.
+
 ### Changed
 
 - 저장소 이름을 `api-ripple`에서 `config-guard`로 바꿨다. Action 경로는 `LEEJaeHyeok97/config-guard/action@v0`이다. 옛 주소는 GitHub가 새 주소로 넘겨 준다.
@@ -30,5 +40,6 @@
 - 릴리스 설정: 태그 푸시 시 CLI jar를 GitHub Release에 첨부하는 워크플로, Gradle Plugin Portal 배포 설정(core를 플러그인 jar에 포함, artifactId `config-guard-gradle-plugin`) (M9)
 - Agent Skill 평가 `evals/`: 과제 프로젝트 5개, 실행·채점 스크립트(`run.sh`, `score.py`, `report.py`), 결과 `evals/RESULTS.md` (M10)
 
-[Unreleased]: https://github.com/LEEJaeHyeok97/config-guard/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/LEEJaeHyeok97/config-guard/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/LEEJaeHyeok97/config-guard/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/LEEJaeHyeok97/config-guard/releases/tag/v0.1.0

@@ -1,8 +1,10 @@
 # Gradle 플러그인 DSL
 
+[English](gradle-dsl.en.md)
+
 ```kotlin
 plugins {
-    id("io.github.leejaehyeok97.config-guard") version "0.1.0"
+    id("io.github.leejaehyeok97.config-guard") version "0.1.1"
 }
 
 configGuard {
@@ -42,7 +44,7 @@ CLI 옵션과의 대응: `profiles` ↔ `--profile`, `envFiles` ↔ `--env-file`
 
 - 입력: `src/main/java/**/*.java`, `src/main/resources/application*`, `src/main/resources/config/application*`, `envFiles`의 파일, 위 속성들
 - 출력: `build/reports/config-guard/report.md`(PR 코멘트용), `build/reports/config-guard/report.json`([JSON 리포트](json-report.md))
-- 콘솔에는 [콘솔 형식](../../README.md#출력-예시) 리포트를 출력한다.
+- 콘솔에는 [콘솔 형식](../../README.ko.md#출력-예시) 리포트를 출력한다.
 - 리포트를 먼저 쓰고 나서 실패한다. GitHub Action이 실패한 빌드에서도 코멘트를 달 수 있다.
 - 증분 빌드: 입력이 그대로면 `UP-TO-DATE`. `@CacheableTask`라서 빌드 캐시도 쓴다. 이때는 콘솔 리포트가 다시 출력되지 않으니 `build/reports/config-guard/`를 본다.
 - configuration cache와 호환된다(`--configuration-cache`).

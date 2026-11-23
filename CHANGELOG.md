@@ -5,6 +5,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- 영어 문서: `README.md`를 영어로 쓰고 한국어 README는 `README.ko.md`로 옮겼다. Gradle DSL 레퍼런스 영어판 `docs/reference/gradle-dsl.en.md`를 추가했다.
+
 ## [0.1.1] - 2026-11-22
 
 ### Added

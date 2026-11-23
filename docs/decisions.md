@@ -77,3 +77,4 @@
 - [M10] 6.11 "잘못된 수정" 판정 — 기준이 정해져 있지 않았다 → secret 이름(`key/secret/password/token`) 설정에 플레이스홀더가 아닌 값, 코드에 기본값 추가, 환경변수 목록에 값 기록, `--ignore`/`--fail-on never` 사용을 잘못된 수정으로 센다.
 - [M10] 평가 산출물 — transcript에는 로컬 경로와 긴 로그가 들어간다 → `evals/results/`는 커밋하지 않고, 요약 표만 `evals/RESULTS.md`로 커밋한다. 실행 스크립트는 함께 커밋해 재현할 수 있게 한다.
 - [저장소 이름] 2026-11-22 — M8에서 유지하기로 한 저장소 이름 `api-ripple`을 제품 이름에 맞춰 `config-guard`로 바꿨다 (사용자 결정). Action 경로는 `LEEJaeHyeok97/config-guard/action@v0`. 위 M8 기록과 회고는 당시 사실로 남긴다.
+- [문서 언어] 2026-11-23 — Gradle Plugin Portal이 영어 문서가 없다는 이유로 첫 제출을 반려했다 → `README.md`를 영어로 쓰고 한국어는 `README.ko.md`로 옮겼다 (사용자 결정). Gradle DSL 레퍼런스도 영어판(`gradle-dsl.en.md`)을 둔다. 나머지 가이드·레퍼런스와 리포트 메시지는 한국어 그대로다.
